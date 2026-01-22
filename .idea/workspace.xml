@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5d48edba-2e29-4ccb-ab0a-c22186adf681" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/NexusRankings.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/NexusRankings.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templarios/ranqueo/sesion.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templarios/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templarios/base.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +17,7 @@
   </component>
   <component name="CopilotPersistence">
     <persistenceIdMap>
+      <entry key="_C:/Repositorio/NexusRankings" value="38c6wtGHTJkkRbfsmM65j5Jw80p" />
       <entry key="_G:/Mi unidad/SAFA/Año5/piton/NexusRankings" value="38HnfMyUjfwKZscbYYbUbxo7Vpd" />
     </persistenceIdMap>
   </component>
@@ -29,8 +31,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Jupyter Notebook" />
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -93,7 +95,6 @@
         <env name="DJANGO_SETTINGS_MODULE" value="NexusRankingsProyect.settings" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.14 (NexusRankings) (2)" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -114,8 +115,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-PY-253.29346.142" />
-        <option value="bundled-python-sdk-f2b7a9f6281b-6e1f45a539f7-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-253.29346.142" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-PY-253.29346.308" />
+        <option value="bundled-python-sdk-ca5e2b39c7df-6e1f45a539f7-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-253.29346.308" />
       </set>
     </attachedChunks>
   </component>
@@ -138,6 +139,7 @@
       <workItem from="1769073386558" duration="216000" />
       <workItem from="1769074475613" duration="665000" />
       <workItem from="1769075407449" duration="415000" />
+      <workItem from="1769086749926" duration="5641000" />
     </task>
     <servers />
   </component>
