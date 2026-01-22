@@ -1,0 +1,36 @@
+[{
+  "_id": {
+    "$oid": "697130d834e958e706cfaf50"
+  },
+  "game_id": 1,
+  "name": "prueba",
+  "nexusmods_url": "https://www.nexusmods.com/morrowind",
+  "mods": 1
+},
+{
+  "_id": {
+    "$oid": "6971349f34e958e706cfaf51"
+  },
+  "game_id": 100,
+  "name": "Morrowind",
+  "nexusmods_url": "https://www.nexusmods.com/morrowind",
+  "mods": 14456
+},
+{
+  "_id": {
+    "$oid": "697134e334e958e706cfaf52"
+  },
+  "game_id": 101,
+  "nexusmods_url": "https://www.nexusmods.com/oblivion",
+  "mods": 32914,
+  "name": "Oblivion"
+},
+{
+  "_id": {
+    "$oid": "6971350e34e958e706cfaf53"
+  },
+  "game_id": 102,
+  "nexusmods_url": "https://www.nexusmods.com/shadowrunreturns",
+  "mods": 112,
+  "name": "Shadowrun Returns"
+}]

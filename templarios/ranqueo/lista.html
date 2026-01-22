@@ -3,10 +3,25 @@
 {% block title %}Lista Mods{% endblock %}
 
 {% block content %}
-    <div>AAAA</div><br>
-    <div>AAAA</div><br>
-    <div>AAAA</div><br>
-    <div>AAAA</div><br>
-    <div>AAAA</div><br>
-    <div>AAAA</div><br>
+    <table>
+    <thead>
+        <tr>
+            <th>Juego</th>
+            <th>Mods</th>
+            <th>Enlace</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for game in datos %}
+            <tr>
+                <th>{{ game.name }} </th>
+                <th>{{ game.mods }} </th>
+                <th><a href="{{ game.nexusmods_url }}">sitio</a></th>
+            </tr>
+        {% empty %}
+          <p>No hay juegos.</p>
+        {% endfor %}
+    </tbody>
+    </table>
+
 {% endblock %}
