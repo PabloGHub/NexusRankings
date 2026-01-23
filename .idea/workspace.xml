@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5d48edba-2e29-4ccb-ab0a-c22186adf681" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/NexusRankings.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/NexusRankings.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templarios/ranqueo/lista.html" beforeDir="false" afterPath="$PROJECT_DIR$/templarios/ranqueo/lista.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +15,7 @@
   </component>
   <component name="CopilotPersistence">
     <persistenceIdMap>
+      <entry key="_C:/Users/DAM/Documents/GitHub/NexusRankings" value="38eFSqku8tVA2FjcZqX9C0mbeYt" />
       <entry key="_G:/Mi unidad/SAFA/Año5/piton/NexusRankings" value="38HnfMyUjfwKZscbYYbUbxo7Vpd" />
     </persistenceIdMap>
   </component>
@@ -137,7 +137,8 @@
       <workItem from="1769072187377" duration="1141000" />
       <workItem from="1769073386558" duration="216000" />
       <workItem from="1769074475613" duration="665000" />
-      <workItem from="1769075407449" duration="415000" />
+      <workItem from="1769075407449" duration="453000" />
+      <workItem from="1769152132189" duration="2423000" />
     </task>
     <servers />
   </component>
