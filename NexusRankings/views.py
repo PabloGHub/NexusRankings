@@ -5,21 +5,28 @@ from .models import *
 
 # Create your views here.
 def listar_nexusrankings(request):
-    datos:Game = Game.objects.all()
+    datos = Game.objects.all()
     context = {'datos' : datos}
     return render(request, 'ranqueo/lista.html', context)
 
 def registrarse(request):
+    context = {'datos' : {
+        "accionNom" : "Registrarse",
+        "accionTipo" : 0,
+        "form" : RegistrarForm()
+    }}
+
     if (request.method == 'POST'):
         datosFormulario = RegistrarForm(request.POST)
-
-        return render(request, 'ranqueo/inicio.html')
+        if datosFormulario.is_valid():
+            user = datosFormulario.save(commit=False)
+            # user.set_password(datosFormulario.cleaned_data['contra'])
+            user.save()
+            return render(request, 'ranqueo/inicio.html')
+        else:
+            context['datos']['form'] = datosFormulario
+            return render(request, 'ranqueo/sesion.html', context)
     else:
-        context = {'datos' : {
-            "accionNom" : "Registrarse",
-            "accionTipo" : 0,
-            "form" : RegistrarForm()
-        }}
         return render(request, 'ranqueo/sesion.html', context)
 
 def loguearse(request):

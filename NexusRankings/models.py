@@ -1,8 +1,12 @@
+from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
+from django.contrib.auth.models import PermissionsMixin, UserManager
 from django.db import models
-try:
-    from django_mongodb_backend.models import EmbeddedModel as Modelo
-except Exception:
-    Modelo = models.Model
+import django_mongodb_backend
+
+# try:
+#     from django_mongodb_backend.models import EmbeddedModel as Modelo
+# except Exception:
+#     Modelo = models.Model
 
 # Create your models here.
 class Game(models.Model):
@@ -17,7 +21,7 @@ class Game(models.Model):
 
     def __str__(self):
         return self.name
-    
+
 
 class Mod(models.Model):
     mod_id:int = models.IntegerField(null=False, unique=True)
@@ -34,13 +38,33 @@ class Mod(models.Model):
     def __str__(self):
         return self.name
 
+class UserManager(BaseUserManager):
+    def create_user(self, username, admin=False, password=None):
+        if not username:
+            raise ValueError("Debes rellenar los campos requeridos (username)")
+        user = self.model(nombre=username, super=admin)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
 
-class usuario(models.Model):
+    def create_superuser(self, username, admin=True, password=None):
+        user = self.create_user(username, admin, password)
+        user.is_superuser = True
+        user.is_staff = True
+        user.save(using=self._db)
+        return user
+
+class Usuario(AbstractBaseUser, PermissionsMixin):
     nombre:str = models.CharField(max_length=100, null=False, unique=True)
-    contra:str = models.CharField(max_length=100, null=False)
+    password: str = models.CharField(max_length=128, default='') # Esto no tiene ningun puto sentido.
+    super:bool = models.BooleanField(default=False)
+    is_active:bool = models.BooleanField(default=True)
+    is_staff:bool = models.BooleanField(default=False)
 
-    class Meta:
-        pass
+    objects = UserManager()
+
+    USERNAME_FIELD = 'nombre'
+    REQUIRED_FIELDS = ['super']
 
     def __str__(self):
         return self.nombre

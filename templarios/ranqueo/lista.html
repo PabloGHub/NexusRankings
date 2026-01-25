@@ -12,11 +12,11 @@
         </tr>
     </thead>
     <tbody>
-        {% for game in datos %}
+        {% for Game in datos %}
             <tr>
-                <th class="px-2">{{ game.name }} </th>
-                <th class="px-2">{{ game.mods }} </th>
-                <th class="px-2"><a href="{{ game.nexusmods_url }}">sitio</a></th>
+                <th class="px-2">{{ Game.name }} </th>
+                <th class="px-2">{{ Game.mods }} </th>
+                <th class="px-2"><a href="{{ Game.nexusmods_url }}">sitio</a></th>
             </tr>
         {% empty %}
           <p>No hay juegos.</p>
