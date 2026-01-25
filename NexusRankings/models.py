@@ -6,7 +6,7 @@ except Exception:
 
 # Create your models here.
 class Game(models.Model):
-    game_id:int = models.IntegerField(null=False)
+    game_id:int = models.IntegerField(null=False, unique=True)
     name:str = models.CharField(max_length=100, null=False)
     nexusmods_url:str = models.CharField(max_length=200, null=False)
     mods:int = models.IntegerField(null=False)
@@ -20,7 +20,7 @@ class Game(models.Model):
     
 
 class Mod(models.Model):
-    mod_id:int = models.IntegerField(null=False)
+    mod_id:int = models.IntegerField(null=False, unique=True)
     game_id:int = models.IntegerField(null=False)
     name:str = models.CharField(max_length=200, null=False)
     summary:str = models.CharField(max_length=500, null=False)
@@ -33,3 +33,14 @@ class Mod(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class usuario(models.Model):
+    nombre:str = models.CharField(max_length=100, null=False, unique=True)
+    contra:str = models.CharField(max_length=100, null=False)
+
+    class Meta:
+        pass
+
+    def __str__(self):
+        return self.nombre
