@@ -7,6 +7,9 @@
     <list default="true" id="5d48edba-2e29-4ccb-ab0a-c22186adf681" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/NexusRankings/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templarios/ranqueo/lista.html" beforeDir="false" afterPath="$PROJECT_DIR$/templarios/ranqueo/lista.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templarios/ranqueo/sesion.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NexusRankings/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/NexusRankings/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -16,6 +19,7 @@
   </component>
   <component name="CopilotPersistence">
     <persistenceIdMap>
+      <entry key="_C:/Users/DAM/Documents/GitHub/NexusRankings" value="38eFSqku8tVA2FjcZqX9C0mbeYt" />
       <entry key="_C:/Repositorio/NexusRankings" value="38c6wtGHTJkkRbfsmM65j5Jw80p" />
       <entry key="_G:/Mi unidad/SAFA/Año5/piton/NexusRankings" value="38HnfMyUjfwKZscbYYbUbxo7Vpd" />
     </persistenceIdMap>
@@ -137,6 +141,8 @@
       <workItem from="1769072187377" duration="1141000" />
       <workItem from="1769073386558" duration="216000" />
       <workItem from="1769074475613" duration="665000" />
+      <workItem from="1769075407449" duration="453000" />
+      <workItem from="1769152132189" duration="2423000" />
       <workItem from="1769075407449" duration="415000" />
       <workItem from="1769086749926" duration="5665000" />
       <workItem from="1769165028246" duration="1962000" />
