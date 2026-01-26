@@ -84,11 +84,12 @@ DATABASES = {
     {
         'ENGINE': 'django_mongodb_backend',
         'HOST': 'mongodb://localhost:27017/',
-        'NAME': 'NexusRankingsDB', # gotreviews
+        'NAME': 'NexusRankings', # gotreviews
     }
 }
 
-DATABASE_ROUTERS = ['NexusRankings.db_routers.MongoRouter']
+# DATABASE_ROUTERS = ['NexusRankings.db_routers.MongoRouter']
+
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
 
