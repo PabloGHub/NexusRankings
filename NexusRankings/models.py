@@ -40,16 +40,16 @@ class Mod(models.Model):
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, username, admin=False, password=None):
+    def create_user(self, username, password=None):
         if not username:
             raise ValueError("Debes rellenar los campos requeridos (username)")
-        user = self.model(nombre=username, super=admin)
+        user = self.model(nombre=username)
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, username, admin=True, password=None):
-        user = self.create_user(username, admin, password)
+    def create_superuser(self, username, password=None):
+        user = self.create_user(username, password)
         user.is_superuser = True
         user.is_staff = True
         user.save(using=self._db)
@@ -58,14 +58,14 @@ class UserManager(BaseUserManager):
 class Usuario(AbstractBaseUser, PermissionsMixin):
     nombre:str = models.CharField(max_length=100, null=False, unique=True)
     password: str = models.CharField(max_length=128, default='') # Esto no tiene ningun puto sentido.
-    super:bool = models.BooleanField(default=False)
+    # super:bool = models.BooleanField(default=False)
     is_active:bool = models.BooleanField(default=True)
     is_staff:bool = models.BooleanField(default=False)
 
     objects = UserManager()
 
     USERNAME_FIELD = 'nombre'
-    REQUIRED_FIELDS = ['super']
+    REQUIRED_FIELDS = []
 
     def __str__(self):
         return self.nombre

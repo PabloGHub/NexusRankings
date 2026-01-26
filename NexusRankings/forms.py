@@ -11,6 +11,10 @@ class RegistrarForm(forms.ModelForm):
         model = Usuario
         fields = ('nombre', 'contra')
 
-class LoguearForm(AuthenticationForm):
-    nombre = forms.CharField(label='Nombre de usuario', max_length=100)
-    contra = forms.CharField(label='Contraseña', max_length=100, widget=forms.PasswordInput)
+class LoguearForm(AuthenticationForm): # AuthenticationForm
+    username = forms.CharField(label='Nombre de usuario', max_length=100)
+    # contra = forms.CharField(label='Contraseña', max_length=100, widget=forms.PasswordInput)
+
+    class Meta:
+        model = Usuario
+        fields = ('nombre', 'contra')
