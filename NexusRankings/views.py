@@ -5,7 +5,7 @@ from .models import *
 
 # Create your views here.
 def listar_nexusrankings(request):
-    datos = Game.objects.all()
+    datos = Game.objects.using("mongodb").all()
     context = {'datos' : datos}
     return render(request, 'ranqueo/lista.html', context)
 

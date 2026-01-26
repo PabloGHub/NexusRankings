@@ -38,6 +38,7 @@ class Mod(models.Model):
     def __str__(self):
         return self.name
 
+
 class UserManager(BaseUserManager):
     def create_user(self, username, admin=False, password=None):
         if not username:

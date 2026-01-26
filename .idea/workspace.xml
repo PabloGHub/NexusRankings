@@ -5,14 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5d48edba-2e29-4ccb-ab0a-c22186adf681" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NexusRankings/db_routers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NexusRankings/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/NexusRankings/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NexusRankings/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/NexusRankings/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NexusRankings/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/NexusRankings/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NexusRankingsProyect/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/NexusRankingsProyect/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templarios/ranqueo/lista.html" beforeDir="false" afterPath="$PROJECT_DIR$/templarios/ranqueo/lista.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -60,7 +55,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "DefaultHtmlFileTemplate": "HTML File",
-    "Django Server.NexusRankings.executor": "Run",
+    "Django Server.NexusRankings.executor": "Debug",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
@@ -161,6 +156,8 @@
       <workItem from="1769165028246" duration="1962000" />
       <workItem from="1769188218822" duration="1758000" />
       <workItem from="1769341660430" duration="21524000" />
+      <workItem from="1769411928779" duration="159000" />
+      <workItem from="1769412300062" duration="2604000" />
     </task>
     <servers />
   </component>
