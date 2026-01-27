@@ -1,25 +1,27 @@
 {% extends 'base.html' %}
 
-{% block title %}Lista Mods{% endblock %}
+{% block title %}{{ datos.tipo }}{% endblock %}
 
 {% block content %}
     <table class="table table-primary">
     <thead>
         <tr>
-            <th class="px-2">Juego</th>
+            <th class="px-2">{{ datos.tipo }}</th>
             <th class="px-2">Mods</th>
+            <th class="px-2">Ir Mods</th>
             <th class="px-2">Enlace</th>
         </tr>
     </thead>
     <tbody>
-        {% for Game in datos %}
+        {% for cosa in datos.items %}
             <tr>
-                <th class="px-2">{{ Game.name }} </th>
-                <th class="px-2">{{ Game.mods }} </th>
-                <th class="px-2"><a href="{{ Game.nexusmods_url }}">sitio</a></th>
+                <th class="px-2">{{ cosa.name }} </th>
+                <th class="px-2">{{ cosa.mods }} </th>
+                <th class="px-2"><a class="btn btn-prymary" href="{% url '/listarMods/' %}{{ cosa.game_id }}/">Ir a {{ cosa.name }}</a></th>
+                <th class="px-2"><a href="{{ cosa.nexusmods_url }}">sitio</a></th>
             </tr>
         {% empty %}
-          <p>No hay juegos.</p>
+          <p>No hay {{ datos.tipo }}.</p>
         {% endfor %}
     </tbody>
     </table>

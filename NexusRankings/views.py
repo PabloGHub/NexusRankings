@@ -16,7 +16,18 @@ def __ir_lista(request, context):
 
 def listarGames(request):
     datos = Game.objects.using("mongodb").all()
-    context = {'datos' : datos}
+    context = {'datos' : {
+        "tipo": "Juegos",
+        "items": datos
+    }}
+    return __ir_lista(request, context)
+
+def listarMods(request, game_id):
+    datos = Mod.objects.using("mongodb").filter(game_id=game_id)
+    context = {'datos': {
+        "tipo": "Mods",
+        "items": datos
+    }}
     return __ir_lista(request, context)
 
 def __ir_sesion(request, context):

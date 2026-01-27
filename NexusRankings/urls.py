@@ -4,8 +4,9 @@ from NexusRankings import views
 urlpatterns = [
     path('', views.inicio, name='index'),
     path('listarGames/', views.listarGames, name='listarGames'),
-    path('registrarse/', views.registrarse, name='registrarse'),
-    path('loguearse/', views.loguearse, name='loguearse'),
-    path('desLoguearse/', views.desLoguearse, name='desLoguearse'),
+    path('/registrarse/', views.registrarse, name='registrarse'),
+    path('/loguearse/', views.loguearse, name='loguearse'),
+    path('/desLoguearse/', views.desLoguearse, name='desLoguearse'),
+    path('/listarMods/<int:game_id>/', views.listarMods, name='listarMods'),
 ]
 
