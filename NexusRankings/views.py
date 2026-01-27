@@ -19,6 +19,11 @@ def listarGames(request):
     context = {'datos' : datos}
     return __ir_lista(request, context)
 
+def __ir_sesion(request, context):
+    if request.user.is_authenticated:
+        return inicio(request)
+    else:
+        return render(request, 'ranqueo/sesion.html', context)
 
 def __ir_registro(request, form:RegistrarForm):
     context = {'datos': {
@@ -26,7 +31,7 @@ def __ir_registro(request, form:RegistrarForm):
         "accionTipo" : 0,
         "form": form
     }}
-    return render(request, 'ranqueo/sesion.html', context)
+    return __ir_sesion(request, context)
 
 def __registrarse(request, datosFormulario):
     if datosFormulario.is_valid():
@@ -50,7 +55,6 @@ def registrarse(request):
     else:
         return __ir_registro(request, RegistrarForm())
 
-
 def __ir_logueo(request, form:LoguearForm):
     context = {'datos': {
         "accionNom": "Iniciar Sesión",
@@ -68,7 +72,6 @@ def __loguearse(request, datosFormulario):
             login(request, user)
             return listarGames(request)
     return __ir_logueo(request, datosFormulario)
-
 
 def loguearse(request):
     if (request.method == 'POST'):
