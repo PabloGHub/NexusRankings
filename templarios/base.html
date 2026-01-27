@@ -12,12 +12,12 @@
         <header>
             <h1>NexusRanking-{% block title %} In-Titulado {% endblock %}</h1>
             <br>
-            <a href="/">Inicio</a>
+            <a href="{% url 'index' %}">Inicio</a>
             {% if user.is_authenticated %}
-                <a href="{% url '/desLoguearse/' %}">CerrarSesion</a>
+                <a href="{% url 'desLoguearse' %}">CerrarSesion</a>
             {% else %}
-                <a href="{% url '/loguearse/' %}">IniciarSesion</a>
-                <a href="{% url '/registrarse/' %}">Registrarse</a>
+                <a href="{% url 'loguearse' %}">IniciarSesion</a>
+                <a href="{% url 'registrarse' %}">Registrarse</a>
             {% endif %}
             <hr>
         </header>

@@ -17,7 +17,7 @@
             <tr>
                 <th class="px-2">{{ cosa.name }} </th>
                 <th class="px-2">{{ cosa.mods }} </th>
-                <th class="px-2"><a class="btn btn-prymary" href="{% url '/listarMods/' %}{{ cosa.game_id }}/">Ir a {{ cosa.name }}</a></th>
+                <th class="px-2"><a class="btn btn-primary" href="{% url 'listarMods' cosa.game_id %}">Ir a {{ cosa.name }}</a></th>
                 <th class="px-2"><a href="{{ cosa.nexusmods_url }}">sitio</a></th>
             </tr>
         {% empty %}
