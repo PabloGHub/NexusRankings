@@ -1,6 +1,8 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render
 
+from .CargadorJson import *
+
 from .forms import *
 from .models import *
 
@@ -105,8 +107,11 @@ def __ir_importacion(request, context):
     else:
         return inicio(request)
 
-def __importarJuegos(request, context, datosArchivo):
-    Game.objects.using("mongodb").update(datosArchivo)
+def __importarJuegos(request, context):
+    arsivo = request.FILES.get('js_file')
+    if arsivo is not None:
+        cargarJuegos(arsivo)
+
     return __ir_importacion(request, context)
 
 def importarGames(request):
@@ -114,18 +119,25 @@ def importarGames(request):
         "tipo": "Juegos",
         "accion" : 0
     }}
-
     if request.method == "POST":
-        arsivo = request.FILES.get('js_file')
-        if not arsivo:
-            return __ir_importacion(request, context)
-        return __importarJuegos(request, context, arsivo)
+        return __importarJuegos(request, context)
     else:
         return __ir_importacion(request, context)
+
+
+def __importarMods(request, context):
+    arsivo = request.FILES.get('js_file')
+    if arsivo is not None:
+        cargarMods(arsivo)
+
+    return __ir_importacion(request, context)
 
 def importarMods(request):
     context = {'datos' : {
         "tipo": "Mods",
         "accion" : 1
     }}
-    return __ir_importacion(request, context)
+    if request.method == "POST":
+        return __importarMods(request, context)
+    else:
+        return __ir_importacion(request, context)

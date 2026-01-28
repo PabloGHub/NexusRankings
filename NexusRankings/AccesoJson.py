@@ -1,50 +1,45 @@
 import json
-from models import Game, Mod
+from .models import Game, Mod
 
-class AccesoJson:
-    def __init__(self, ruta):
-        self.ruta = ruta
+def darme(archivo):
+    return json.loads(archivo)
 
-    def darme(self):
-        with open(self.ruta, "r") as archivo:
-            return json.load(archivo)
+def crearJuego(dato):
+    return Game(
+        game_id = int(dato["game_id"]),
+        name = str(dato["name"]),
+        nexusmods_url = str(dato["nexusmods_url"]),
+        mods = int(dato["mods"])
+        )
 
-    def dar(self, datos):
-        with open(self.ruta, "w") as archivo:
-            json.dump(datos, archivo, indent=4)   
+def crearJuegos(datos):
+    _lista = []
+    for _j in datos:
+        _novoJuego = crearJuego(_j)
+        _lista.append(_novoJuego)
+    return _lista
 
+def listarJuegos(archivo):
+    _juegos = darme(archivo)
+    return crearJuegos(_juegos)
 
-    def crearJuegos(self, datos):
-        _lista = []
-        for _j in datos:
-            _novoJuego = Game(
-                int(_j["game_id"]),
-                str(_j["name"]),
-                str(_j["nexusmods_url"]),
-                int(_j["mods"])
-                )
-            _lista.append(_novoJuego)
-        return _lista
+def crearMod(dato):
+    return Mod(
+        mod_id = int(dato["mod_id"]),
+        game_id = int(dato["game_id"]),
+        name = str(dato["name"]),
+        summary = str(dato["summary"]),
+        picture_url = str(dato["picture_url"]),
+        author = str(dato["author"])
+    )
 
-    def listarJuegos(self):
-        _juegos = self.darme()
-        return self.crearJuegos(_juegos)
+def crearMods(datos):
+    _lista = []
+    for _j in datos:
+        _novoMod = crearMod(_j)
+        _lista.append(_novoMod)
+    return _lista
 
-
-    def crearMods(self, datos):
-        _lista = []
-        for _j in datos:
-            _novoMods = Mod(
-                int(_j["mod_id"]),
-                int(_j["game_id"]),
-                str(_j["name"]),
-                str(_j["summary"]),
-                str(_j["picture_url"]),
-                str(_j["author"])
-                )
-            _lista.append(_novoMods)
-        return _lista
-
-    def listarMods(self):
-        _mods = self.darme()
-        return self.crearMods(_mods)
+def listarMods(archivo):
+    _mods = darme(archivo)
+    return crearMods(_mods)
