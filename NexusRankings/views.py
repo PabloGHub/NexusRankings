@@ -97,3 +97,35 @@ def desLoguearse(request):
 
 def handler404(request, exception):
     return render(request, 'e404.html', status=404)
+
+
+def __ir_importacion(request, context):
+    if request.user.is_authenticated and request.user.is_superuser:
+        return render(request, 'ranqueo/importar.html', context)
+    else:
+        return inicio(request)
+
+def __importarJuegos(request, context, datosArchivo):
+    Game.objects.using("mongodb").update(datosArchivo)
+    return __ir_importacion(request, context)
+
+def importarGames(request):
+    context = {'datos' : {
+        "tipo": "Juegos",
+        "accion" : 0
+    }}
+
+    if request.method == "POST":
+        arsivo = request.FILES.get('js_file')
+        if not arsivo:
+            return __ir_importacion(request, context)
+        return __importarJuegos(request, context, arsivo)
+    else:
+        return __ir_importacion(request, context)
+
+def importarMods(request):
+    context = {'datos' : {
+        "tipo": "Mods",
+        "accion" : 1
+    }}
+    return __ir_importacion(request, context)

@@ -2,10 +2,10 @@
   "_id": {
     "$oid": "697130d834e958e706cfaf50"
   },
-  "game_id": 1,
+  "game_id": 69,
   "name": "prueba",
   "nexusmods_url": "https://www.nexusmods.com/morrowind",
-  "mods": 1
+  "mods": -13
 },
 {
   "_id": {

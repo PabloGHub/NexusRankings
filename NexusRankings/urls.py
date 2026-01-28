@@ -8,5 +8,7 @@ urlpatterns = [
     path('loguearse/', views.loguearse, name='loguearse'),
     path('desLoguearse/', views.desLoguearse, name='desLoguearse'),
     path('listarMods/<int:game_id>/', views.listarMods, name='listarMods'),
+    path('importarGames/', views.importarGames, name='importarGames'),
+    path('importarMods/', views.importarMods, name='importarMods'),
 ]
 

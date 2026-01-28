@@ -1,10 +1,5 @@
-class CargadorJson:
-    import json
+import json
+import AccesoJson
+from models import *
 
-    def __init__(self, ruta_archivo):
-        self.ruta_archivo = ruta_archivo
-
-    def cargar_datos(self):
-        with open(self.ruta_archivo, 'r', encoding='utf-8') as archivo:
-            datos = self.json.load(archivo)
-        return datos
+def cargarJuegos(archivo):
