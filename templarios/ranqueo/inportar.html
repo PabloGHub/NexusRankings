@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %} Importar-Json {% endblock %}
+
+{% block content %}
+
+    <h3>Cosa</h3>
+
+    <form id="js_form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+            <div>
+                <label for="csvFile">Seleccionar archivo CSV</label>
+                <input type="file" id="js_file" name="js_archivo" accept=".js" required>
+            </div>
+
+            <div>
+                <button type="button" id="previewBtn" >Previsualizar</button>
+                <button type="submit">Guardar</button>
+            </div>
+    </form>
+
+{% endblock %}
