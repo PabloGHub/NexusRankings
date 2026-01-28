@@ -17,6 +17,26 @@
             <tr>
                 <th class="px-2">{{ cosa.name }} </th>
                 <th class="px-2">{{ cosa.mods }} </th>
+                <th>
+                    <fieldset>
+                        <input id="radio1" type="radio" name="reputacion">
+                        <label for="radio1">1</label>
+
+                        <input id="radio2" type="radio" name="reputacion">
+                        <label for="radio2">2</label>
+
+                        <input id="radio3" type="radio" name="reputacion">
+                        <label for="radio3">3</label>
+
+                        <input id="radio4" type="radio" name="reputacion">
+                        <label for="radio4">4</label>
+
+                        <input id="radio5" type="radio" name="reputacion">
+                        <label for="radio5">5</label>
+
+                    </fieldset>
+
+                </th>
                 <th class="px-2"><a href="{% url 'listarMods' cosa.game_id %}"><button>Ir a {{ cosa.name }}</button></a></th>
                 <th class="px-2"><a href="{{ cosa.nexusmods_url }}">sitio</a></th>
             </tr>
@@ -25,4 +45,33 @@
         {% endfor %}
     </tbody>
     </table>
+
+    <script>
+
+        document.getElementById("Button").addEventListener('click', analyzeText());
+
+        function analyzeText(){
+            var text = document.getElementById('text-to-analyze').value;
+
+            $ajax({
+                type: "POST",
+                url: "/models.py",   /* Call python function in this script */
+                data: {param: text},   /* Passing the text data */
+                success: callback
+            });
+        }
+
+        function callback(response){
+            console.log(response);
+        }
+    </script>
+    <!--
+    <style>
+        input,label {
+          display: inline-block;
+          margin-right: 15px;
+        }
+    </style>
+    -->
+    <!-- https://stackoverflow.com/questions/51106830/how-to-call-python-functions-from-javascript-in-django -->
 {% endblock %}

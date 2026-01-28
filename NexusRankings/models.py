@@ -1,7 +1,7 @@
 from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin, UserManager
 from django.db import models
-import django_mongodb_backend
+from django_mongodb_backend.models import *
 
 # try:
 #     from django_mongodb_backend.models import EmbeddedModel as Modelo
@@ -22,6 +22,10 @@ class Game(models.Model):
     def __str__(self):
         return self.name
 
+
+class Reputacion(EmbeddedModel):
+    user_id:int = models.IntegerField(null=False)
+    score:int = models.IntegerField(null=False) # 0 -> 5
 
 class Mod(models.Model):
     mod_id:int = models.IntegerField(null=False, unique=True)
