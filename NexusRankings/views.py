@@ -94,3 +94,6 @@ def loguearse(request):
 def desLoguearse(request):
     logout(request)
     return inicio(request)
+
+def handler404(request, exception):
+    return render(request, 'e404.html', status=404)
