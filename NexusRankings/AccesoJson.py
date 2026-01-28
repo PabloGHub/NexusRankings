@@ -13,10 +13,10 @@ class AccesoJson:
         with open(self.ruta, "w") as archivo:
             json.dump(datos, archivo, indent=4)   
 
-    def listarJuegos(self):
-        _juegos = self.darme()
+
+    def crearJuegos(self, datos):
         _lista = []
-        for _j in _juegos:
+        for _j in datos:
             _novoJuego = Game(
                 int(_j["game_id"]),
                 str(_j["name"]),
@@ -25,11 +25,15 @@ class AccesoJson:
                 )
             _lista.append(_novoJuego)
         return _lista
-    
-    def listarMods(self):
-        _mods = self.darme()
+
+    def listarJuegos(self):
+        _juegos = self.darme()
+        return self.crearJuegos(_juegos)
+
+
+    def crearMods(self, datos):
         _lista = []
-        for _j in _mods:
+        for _j in datos:
             _novoMods = Mod(
                 int(_j["mod_id"]),
                 int(_j["game_id"]),
@@ -40,3 +44,7 @@ class AccesoJson:
                 )
             _lista.append(_novoMods)
         return _lista
+
+    def listarMods(self):
+        _mods = self.darme()
+        return self.crearMods(_mods)
