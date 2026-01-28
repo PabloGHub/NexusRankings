@@ -13,7 +13,7 @@ class AccesoJson:
         with open(self.ruta, "w") as archivo:
             json.dump(datos, archivo, indent=4)   
 
-    def listarMods(self):
+    def listarJuegos(self):
         _juegos = self.darme()
         _lista = []
         for _j in _juegos:
