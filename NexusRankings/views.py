@@ -146,17 +146,65 @@ def importarMods(request):
 
 def __ir_reputacionMod(request, context):
     if request.user.is_authenticated:
-        return render(request, 'ranqueo/reputacion.html', context)
+        return render(request, 'ranqueo/mod.html', context)
     else:
         return inicio(request)
 
-def reputacionMod(request, mod_id):
-    mod = Mod.objects.using("mongodb").get(mod_id=mod_id)
-    form = mod.reputaciones.filter(user_id=request.user.id).first()
-    if form is None: form = ReputacionForm()
+
+def __mostrarReputacionMod(request, mod:Mod):
+    form:ReputacionForm = ReputacionForm()
+
+    rep:Reputacion = next(
+        (r for r in (mod.reputaciones or []) if r.user_id == request.user.id),
+        None
+    )
+
+    form.score = rep.score if rep else None
+    form.summary = rep.summary if rep else None
 
     context = {'datos' : {
         "modName": mod.name,
         "form": form
     }}
     return __ir_reputacionMod(request, context)
+
+def __guardarReputacionMod(request, mod:Mod, datosFormulario):
+    if datosFormulario.is_valid():
+        datosFormulario.save(using="mongodb")
+
+    return __mostrarReputacionMod(request, mod)
+
+def reputacionMod(request, mod_id):
+    mod = Mod.objects.using("mongodb").get(mod_id=mod_id)
+    # form = mod.reputaciones.filter(user_id=request.user.id).first()
+    form:ReputacionForm = ReputacionForm()
+
+    rep:Reputacion = next(
+        (r for r in (mod.reputaciones or []) if r.user_id == request.user.id),
+        None
+    )
+
+    form.score = rep.score if rep else None
+    form.summary = rep.summary if rep else None
+
+    context = {'datos' : {
+        "modName": mod.name,
+        "form": form
+    }}
+    return __ir_reputacionMod(request, context)
+
+
+def ejemplo__registrarse(request, datosFormulario):
+    if datosFormulario.is_valid():
+        contra = datosFormulario.cleaned_data.get('contra')
+        contra2 = datosFormulario.cleaned_data.get('contra2')
+
+        if contra != contra2:
+            return __ir_registro(request, datosFormulario)
+
+        user = datosFormulario.save(commit=False)
+        user.set_password(datosFormulario.cleaned_data['contra'])
+        user.save()
+        return inicio(request)
+    else:
+        return __ir_registro(request, datosFormulario)
