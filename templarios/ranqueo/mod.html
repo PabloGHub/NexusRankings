@@ -3,8 +3,7 @@
 {% block title %} {{ datos.modName }} {% endblock %}
 
 {% block content %}
-    <h3>cosa</h3>
-
+    <h2>{{ datos.modName }}</h2>
     <form method="post">
         {% csrf_token %}
         {{ datos.form.as_p }}

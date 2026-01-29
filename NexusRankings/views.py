@@ -168,30 +168,42 @@ def __mostrarReputacionMod(request, mod:Mod):
     }}
     return __ir_reputacionMod(request, context)
 
-def __guardarReputacionMod(request, mod:Mod, datosFormulario):
+def __guardarReputacionMod(request, mod:Mod, datosFormulario:ReputacionForm):
     if datosFormulario.is_valid():
-        datosFormulario.save(using="mongodb")
+        score = datosFormulario.cleaned_data.get('score')
+        summary = datosFormulario.cleaned_data.get('summary')
+
+        rep:Reputacion = next(
+            (r for r in (mod.reputaciones or []) if r.user_id == request.user.id),
+            None
+        )
+
+        if rep:
+            rep.score = score
+            rep.summary = summary
+        else:
+            nuevaRep = Reputacion(
+                user_id = request.user.id,
+                score = score,
+                summary = summary
+            )
+            if mod.reputaciones is None:
+                mod.reputaciones = []
+            mod.reputaciones.append(nuevaRep)
+
+        # Actualizar solo el campo 'reputaciones' en la DB para evitar un insert accidental
+        Mod.objects.using("mongodb").filter(mod_id=mod.mod_id).update(reputaciones=mod.reputaciones)
+        return __mostrarReputacionMod(request, mod)
 
     return __mostrarReputacionMod(request, mod)
 
 def reputacionMod(request, mod_id):
     mod = Mod.objects.using("mongodb").get(mod_id=mod_id)
-    # form = mod.reputaciones.filter(user_id=request.user.id).first()
-    form:ReputacionForm = ReputacionForm()
-
-    rep:Reputacion = next(
-        (r for r in (mod.reputaciones or []) if r.user_id == request.user.id),
-        None
-    )
-
-    form.score = rep.score if rep else None
-    form.summary = rep.summary if rep else None
-
-    context = {'datos' : {
-        "modName": mod.name,
-        "form": form
-    }}
-    return __ir_reputacionMod(request, context)
+    if request.method == "POST":
+        datosFormulario:ReputacionForm = ReputacionForm(request.POST)
+        return __guardarReputacionMod(request, mod, datosFormulario)
+    else:
+        return __mostrarReputacionMod(request, mod)
 
 
 def ejemplo__registrarse(request, datosFormulario):
