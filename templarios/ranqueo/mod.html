@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ datos.modName }} {% endblock %}
+
+{% block content %}
+    <h3>cosa</h3>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ datos.form.as_p }}
+        <button type="submit">Guardar</button>
+    </form>
+{% endblock %}

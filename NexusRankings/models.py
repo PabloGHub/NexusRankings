@@ -26,6 +26,7 @@ class Game(models.Model):
 class Reputacion(EmbeddedModel):
     user_id:int = models.IntegerField(null=False)
     score:int = models.IntegerField(null=False) # 0 -> 5
+    summary:str = models.CharField(max_length=300, null=False)
 
 class Mod(models.Model):
     mod_id:int = models.IntegerField(null=False, unique=True)

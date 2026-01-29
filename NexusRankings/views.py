@@ -20,6 +20,7 @@ def listarGames(request):
     datos = Game.objects.using("mongodb").all()
     context = {'datos' : {
         "tipo": "Juegos",
+        "accion" : 0,
         "items": datos
     }}
     return __ir_lista(request, context)
@@ -28,6 +29,7 @@ def listarMods(request, game_id):
     datos = Mod.objects.using("mongodb").filter(game_id=game_id)
     context = {'datos': {
         "tipo": "Mods",
+        "accion" : 1,
         "items": datos
     }}
     return __ir_lista(request, context)
@@ -141,5 +143,3 @@ def importarMods(request):
         return __importarMods(request, context)
     else:
         return __ir_importacion(request, context)
-
-

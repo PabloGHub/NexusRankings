@@ -3,42 +3,36 @@
 {% block title %}{{ datos.tipo }}{% endblock %}
 
 {% block content %}
-    <table class=""> <!-- table table-primary -->
+    <table class="table table-success table-hover"> <!-- table table-primary -->
     <thead>
         <tr>
             <th class="px-2">{{ datos.tipo }}</th>
-            <th class="px-2">Mods</th>
-            <th class="px-2">Ir Mods</th>
-            <th class="px-2">Enlace</th>
+            {% if datos.accion == 0 %}
+                <th class="px-2">Mods</th>
+                <th class="px-2">Ir Mods</th>
+                <th class="px-2">Enlace</th>
+            {% else %}
+                <th class="px-2">Descripcion</th>
+                <th class="px-2">img</th>
+                <th class="px-2">Autor</th>
+                <th class="px-2">Reputacion</th>
+            {% endif %}
         </tr>
     </thead>
     <tbody>
         {% for cosa in datos.items %}
             <tr>
                 <th class="px-2">{{ cosa.name }} </th>
-                <th class="px-2">{{ cosa.mods }} </th>
-                <th>
-                    <fieldset>
-                        <input id="radio1" type="radio" name="reputacion">
-                        <label for="radio1">1</label>
-
-                        <input id="radio2" type="radio" name="reputacion">
-                        <label for="radio2">2</label>
-
-                        <input id="radio3" type="radio" name="reputacion">
-                        <label for="radio3">3</label>
-
-                        <input id="radio4" type="radio" name="reputacion">
-                        <label for="radio4">4</label>
-
-                        <input id="radio5" type="radio" name="reputacion">
-                        <label for="radio5">5</label>
-
-                    </fieldset>
-
-                </th>
-                <th class="px-2"><a href="{% url 'listarMods' cosa.game_id %}"><button>Ir a {{ cosa.name }}</button></a></th>
-                <th class="px-2"><a href="{{ cosa.nexusmods_url }}">sitio</a></th>
+                {% if datos.accion == 0 %}
+                    <th class="px-2">{{ cosa.mods }} </th>
+                    <th class="px-2"><a href="{% url 'listarMods' cosa.game_id %}"><button>Ir a {{ cosa.name }}</button></a></th>
+                    <th class="px-2"><a href="{{ cosa.nexusmods_url }}">sitio</a></th>
+                {% else %}
+                    <th class="px-2"><p>{{ cosa.summary }}</p></th>
+                    <th class="px-2"><img src="{{ cosa.picture_url }}" alt=""></th>
+                    <th class="px-2"><p>{{ cosa.author }}</p></th>
+                    <th class="px-2"><a href="#"><button>Valoracion</button></a></th>
+                {% endif %}
             </tr>
         {% empty %}
           <p>No hay {{ datos.tipo }}.</p>
@@ -46,25 +40,6 @@
     </tbody>
     </table>
 
-    <script>
-
-        document.getElementById("Button").addEventListener('click', analyzeText());
-
-        function analyzeText(){
-            var text = document.getElementById('text-to-analyze').value;
-
-            $ajax({
-                type: "POST",
-                url: "/models.py",   /* Call python function in this script */
-                data: {param: text},   /* Passing the text data */
-                success: callback
-            });
-        }
-
-        function callback(response){
-            console.log(response);
-        }
-    </script>
     <!--
     <style>
         input,label {

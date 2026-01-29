@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://unpkg.com/7.css@0.21.1/dist/7.css">
+        <!-- <link rel="stylesheet" href="https://unpkg.com/7.css@0.21.1/dist/7.css"> -->
 
         <title> NexusRanking</title>
     </head>
@@ -13,12 +13,14 @@
         <header>
             <h1>NexusRanking-{% block title %} In-Titulado {% endblock %}</h1>
             <br>
-            <a href="{% url 'index' %}">Inicio</a>
+            <a href="{% url 'index' %}"><button>Inicio</button></a>
             {% if user.is_authenticated %}
-                <a href="{% url 'desLoguearse' %}">CerrarSesion</a>
+                <a href="{% url 'desLoguearse' %}"><button>CerrarSesion</button></a>
+                <a href="{% url 'importarGames' %}"><button>Importar Juegos</button></a>
+                <a href="{% url 'importarMods' %}"><button>Importar Mods</button></a>
             {% else %}
-                <a href="{% url 'loguearse' %}">IniciarSesion</a>
-                <a href="{% url 'registrarse' %}">Registrarse</a>
+                <a href="{% url 'loguearse' %}"><button>IniciarSesion</button></a>
+                <a href="{% url 'registrarse' %}"><button>Registrarse</button></a>
             {% endif %}
             <hr>
         </header>
