@@ -2,6 +2,7 @@ from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin, UserManager
 from django.db import models
 from django_mongodb_backend.models import *
+from django_mongodb_backend.fields import *
 
 # try:
 #     from django_mongodb_backend.models import EmbeddedModel as Modelo
@@ -35,6 +36,7 @@ class Mod(models.Model):
     summary:str = models.CharField(max_length=500, null=False)
     picture_url:str = models.CharField(max_length=200, null=False)
     author:str = models.CharField(max_length=100, null=False)
+    reputaciones:list = EmbeddedModelArrayField(Reputacion, null=True, blank=True)
 
     class Meta:
         db_table = 'mod'

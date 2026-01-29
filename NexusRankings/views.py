@@ -143,3 +143,20 @@ def importarMods(request):
         return __importarMods(request, context)
     else:
         return __ir_importacion(request, context)
+
+def __ir_reputacionMod(request, context):
+    if request.user.is_authenticated:
+        return render(request, 'ranqueo/reputacion.html', context)
+    else:
+        return inicio(request)
+
+def reputacionMod(request, mod_id):
+    mod = Mod.objects.using("mongodb").get(mod_id=mod_id)
+    form = mod.reputaciones.filter(user_id=request.user.id).first()
+    if form is None: form = ReputacionForm()
+
+    context = {'datos' : {
+        "modName": mod.name,
+        "form": form
+    }}
+    return __ir_reputacionMod(request, context)

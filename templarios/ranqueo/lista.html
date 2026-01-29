@@ -31,7 +31,7 @@
                     <th class="px-2"><p>{{ cosa.summary }}</p></th>
                     <th class="px-2"><img src="{{ cosa.picture_url }}" alt=""></th>
                     <th class="px-2"><p>{{ cosa.author }}</p></th>
-                    <th class="px-2"><a href="#"><button>Valoracion</button></a></th>
+                    <th class="px-2"><a href="{% url 'mod' cosa.mod_id %}"><button>Valoracion</button></a></th>
                 {% endif %}
             </tr>
         {% empty %}
