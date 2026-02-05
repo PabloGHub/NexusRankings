@@ -226,15 +226,31 @@ def __mostrarRanking(request, game_id):
     return __ir_ranking(request, context)
 
 def __guardarRanking(request, game_id):
-    jogo:Game = Game.objects.using("mongodb").get(game_id=game_id)
+    rank:Ranking = getRanking(game_id, request.user.id)
+
+    if rank is None:
+        rank = Ranking(user_id=request.user.id, posiciones=[])
 
     try:
         pld = json.loads(request.body.decode('utf-8'))
     except json.JSONDecodeError:
         return HttpResponseBadRequest('JSON inválido')
 
+    posiciones:list = []
+    for item in pld:
+        try:
+            mod_id = int(item.get('mod_id'))
+            position = int(item.get('position'))
+        except Exception:
+            continue
+        if mod_id is not None and position is not None:
+            posiciones.append(Posicion(mod_id=mod_id, position=position))
+
+    rank.posiciones = posiciones
+    guardarRanking(game_id, rank)
+    return __mostrarRanking(request, game_id)
+
 def ranking(request, game_id):
     if request.method == "POST":
-        __guardarRanking(request, game_id)
-
+        return __guardarRanking(request, game_id)
     return __mostrarRanking(request, game_id)
