@@ -4,6 +4,208 @@
 
 <!-- Los tipos de ranking los decide el admin -->
 {% block content %}
-    <h3>cosa</h3>
+    <div class="container-fluid">
+        <h3>{{ datos.gameName }}</h3>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Ranking</h4>
+                <table class="table table-success table-hover">
+                    <thead>
+                        <tr>
+                            <th class="px-2 col-md-1">Posición</th>
+                            <th class="px-2">Mods</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="px-2">1</td>
+                            <td class="px-2 drop-zone" data-position="1"></td>
+                        </tr>
+                        <tr>
+                            <td class="px-2">2</td>
+                            <td class="px-2 drop-zone" data-position="2"></td>
+                        </tr>
+                        <tr>
+                            <td class="px-2">3</td>
+                            <td class="px-2 drop-zone" data-position="3"></td>
+                        </tr>
+                        <tr>
+                            <td class="px-2">4</td>
+                            <td class="px-2 drop-zone" data-position="4"></td>
+                        </tr>
+                        <tr>
+                            <td class="px-2">5</td>
+                            <td class="px-2 drop-zone" data-position="5"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-md-6">
+                <h4>Lista de Mods</h4>
+                <ul id="ranking-list" class="list-group">
+                  {% for m in datos.mods %}
+                    <li class="list-group-item mod-item" data-id="{{ m.mod_id }}" draggable="true">
+                      {{ m.name }} - {{ m.author }}
+                    </li>
+                  {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <input type="hidden" id="gameId" value="{{ datos.game.game_id }}">
+        <!-- <button onclick="saveRanking()">Guardar Ranking</button> -->
+    </div>
+
+    <style>
+        .drop-zone {
+            min-height: 50px;
+            border: 2px dashed #ccc;
+            transition: all 0.3s ease;
+        }
+        
+        .drop-zone.drag-over {
+            background-color: #e3f2fd;
+            border-color: #2196F3;
+        }
+        
+        .mod-item {
+            cursor: move;
+            user-select: none;
+        }
+        
+        .mod-item.dragging {
+            opacity: 0.5;
+        }
+        
+        .mod-in-ranking {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            padding: 5px 10px;
+            border-radius: 4px;
+            position: relative;
+        }
+        
+        .remove-btn {
+            cursor: pointer;
+            color: red;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+    </style>
+
+    <script>
+        let draggedElement = null;
+
+        // Agregar eventos a los mods
+        document.querySelectorAll('.mod-item').forEach(item => {
+            item.addEventListener('dragstart', handleDragStart);
+            item.addEventListener('dragend', handleDragEnd);
+        });
+
+        // Agregar eventos a las zonas de drop
+        document.querySelectorAll('.drop-zone').forEach(zone => {
+            zone.addEventListener('dragover', handleDragOver);
+            zone.addEventListener('dragleave', handleDragLeave);
+            zone.addEventListener('drop', handleDrop);
+        });
+
+        function handleDragStart(e) {
+            draggedElement = this;
+            this.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/html', this.innerHTML);
+        }
+
+        function handleDragEnd(e) {
+            this.classList.remove('dragging');
+        }
+
+        function handleDragOver(e) {
+            if (e.preventDefault) {
+                e.preventDefault();
+            }
+            e.dataTransfer.dropEffect = 'move';
+            this.classList.add('drag-over');
+            return false;
+        }
+
+        function handleDragLeave(e) {
+            this.classList.remove('drag-over');
+        }
+
+        function handleDrop(e) {
+            if (e.stopPropagation) {
+                e.stopPropagation();
+            }
+            e.preventDefault();
+
+            this.classList.remove('drag-over');
+
+            if (draggedElement) {
+                const modId = draggedElement.dataset.id;
+                const modName = draggedElement.textContent.trim();
+                const position = this.dataset.position;
+
+                // Limpiar el contenido anterior si existe
+                this.innerHTML = '';
+
+                // Crear el elemento del mod en el ranking
+                const modDiv = document.createElement('div');
+                modDiv.className = 'mod-in-ranking';
+                modDiv.dataset.id = modId;
+                modDiv.innerHTML = modName + '<span class="remove-btn" onclick="removeFromRanking(this)">✕</span>';
+                
+                this.appendChild(modDiv);
+
+                // Guardar el ranking actualizado
+                saveRanking();
+            }
+
+            return false;
+        }
+
+        function removeFromRanking(btn) {
+            const parent = btn.parentElement.parentElement;
+            parent.innerHTML = '';
+            saveRanking();
+        }
+
+        function saveRanking() {
+            const ranking = [];
+            document.querySelectorAll('.drop-zone').forEach(zone => {
+                const position = zone.dataset.position;
+                const modElement = zone.querySelector('.mod-in-ranking');
+                
+                if (modElement) {
+                    ranking.push({
+                        position: parseInt(position),
+                        mod_id: modElement.dataset.id
+                    });
+                }
+            });
+
+            // Aquí puedes enviar el ranking al servidor
+            console.log('Ranking actualizado:', ranking);
+
+            const gameId = document.getElementById('gameId').value;
+            fetch("/ranking/" + gameId + "/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": "{{ csrf_token }}"
+                },
+                body: JSON.stringify(ranking)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Ranking guardado:', data);
+            })
+            .catch(error => {
+                console.error('Error al guardar:', error);
+            });
+        }
+    </script>
 
 {% endblock %}

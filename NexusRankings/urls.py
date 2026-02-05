@@ -11,5 +11,6 @@ urlpatterns = [
     path('importarGames/', views.importarGames, name='importarGames'),
     path('importarMods/', views.importarMods, name='importarMods'),
     path('mod/<int:mod_id>/', views.reputacionMod, name='mod'),
+    path('ranking/<int:game_id>/', views.ranking, name='ranking'),
 ]
 

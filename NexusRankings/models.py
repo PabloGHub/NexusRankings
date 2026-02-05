@@ -10,11 +10,21 @@ from django_mongodb_backend.fields import *
 #     Modelo = models.Model
 
 # Create your models here.
+class Ranking(EmbeddedModel):
+    user_id:int = models.IntegerField(null=False)
+    # ides de mods.
+    posicion_1:list = ArrayField(models.IntegerField(), null=False)
+    posicion_2:list = ArrayField(models.IntegerField(), null=False)
+    posicion_3:list = ArrayField(models.IntegerField(), null=False)
+    posicion_4:list = ArrayField(models.IntegerField(), null=False)
+    posicion_5:list = ArrayField(models.IntegerField(), null=False)
+
 class Game(models.Model):
     game_id:int = models.IntegerField(null=False, unique=True)
     name:str = models.CharField(max_length=100, null=False, unique=True)
     nexusmods_url:str = models.CharField(max_length=200, null=False)
     mods:int = models.IntegerField(null=False)
+    rankings:list = EmbeddedModelArrayField(Ranking, null=True, blank=True)
 
     class Meta:
         db_table = 'game'

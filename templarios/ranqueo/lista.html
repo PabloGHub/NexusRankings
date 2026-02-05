@@ -10,6 +10,7 @@
             {% if datos.accion == 0 %}
                 <th class="px-2">Mods</th>
                 <th class="px-2">Ir Mods</th>
+                <th class="px-2">Ranking</th>
                 <th class="px-2">Enlace</th>
             {% else %}
                 <th class="px-2">Descripcion</th>
@@ -26,6 +27,7 @@
                 {% if datos.accion == 0 %}
                     <th class="px-2">{{ cosa.mods }} </th>
                     <th class="px-2"><a href="{% url 'listarMods' cosa.game_id %}"><button>Ir a {{ cosa.name }}</button></a></th>
+                    <th class="px-2"><a href="{% url 'ranking' cosa.game_id %}"><button>Ranking</button></a></th>
                     <th class="px-2"><a href="{{ cosa.nexusmods_url }}">sitio</a></th>
                 {% else %}
                     <th class="px-2"><p>{{ cosa.summary }}</p></th>

@@ -206,17 +206,28 @@ def reputacionMod(request, mod_id):
         return __mostrarReputacionMod(request, mod)
 
 
-def ejemplo__registrarse(request, datosFormulario):
-    if datosFormulario.is_valid():
-        contra = datosFormulario.cleaned_data.get('contra')
-        contra2 = datosFormulario.cleaned_data.get('contra2')
-
-        if contra != contra2:
-            return __ir_registro(request, datosFormulario)
-
-        user = datosFormulario.save(commit=False)
-        user.set_password(datosFormulario.cleaned_data['contra'])
-        user.save()
-        return inicio(request)
+def __ir_ranking(request, context):
+    if request.user.is_authenticated:
+        return render(request, 'ranqueo/ranking.html', context)
     else:
-        return __ir_registro(request, datosFormulario)
+        return inicio(request)
+
+def __mostrarRanking(request, game_id):
+    jogo:Game = Game.objects.using("mongodb").get(game_id=game_id)
+    mods = Mod.objects.using("mongodb").filter(game_id=game_id)
+
+    context = {'datos': {
+        "gameName": jogo.name,
+        "game": jogo,
+        "mods": mods,
+    }}
+    return __ir_ranking(request, context)
+
+def __guardarRanking(request, game_id):
+    datos:list = request.body
+
+def ranking(request, game_id):
+    if request.method == "POST":
+        __guardarRanking(request, game_id)
+
+    return __mostrarRanking(request, game_id)
