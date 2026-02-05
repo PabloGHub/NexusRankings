@@ -1,6 +1,8 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render
+from django.http import HttpResponseBadRequest
 
+from .AccesoMondongoDB import *
 from .CargadorJson import *
 
 from .forms import *
@@ -17,7 +19,7 @@ def __ir_lista(request, context):
         return inicio(request)
 
 def listarGames(request):
-    datos = Game.objects.using("mongodb").all()
+    datos = getGames()
     context = {'datos' : {
         "tipo": "Juegos",
         "accion" : 0,
@@ -26,7 +28,7 @@ def listarGames(request):
     return __ir_lista(request, context)
 
 def listarMods(request, game_id):
-    datos = Mod.objects.using("mongodb").filter(game_id=game_id)
+    datos = getMods(game_id)
     context = {'datos': {
         "tipo": "Mods",
         "accion" : 1,
@@ -213,8 +215,8 @@ def __ir_ranking(request, context):
         return inicio(request)
 
 def __mostrarRanking(request, game_id):
-    jogo:Game = Game.objects.using("mongodb").get(game_id=game_id)
-    mods = Mod.objects.using("mongodb").filter(game_id=game_id)
+    jogo:Game = getGame(game_id)
+    mods = getMods(game_id)
 
     context = {'datos': {
         "gameName": jogo.name,
@@ -224,7 +226,12 @@ def __mostrarRanking(request, game_id):
     return __ir_ranking(request, context)
 
 def __guardarRanking(request, game_id):
-    datos:list = request.body
+    jogo:Game = Game.objects.using("mongodb").get(game_id=game_id)
+
+    try:
+        pld = json.loads(request.body.decode('utf-8'))
+    except json.JSONDecodeError:
+        return HttpResponseBadRequest('JSON inválido')
 
 def ranking(request, game_id):
     if request.method == "POST":

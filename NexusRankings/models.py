@@ -10,14 +10,13 @@ from django_mongodb_backend.fields import *
 #     Modelo = models.Model
 
 # Create your models here.
+class Posicion(EmbeddedModel):
+    mod_id:int = models.IntegerField(null=False)
+    position:int = models.IntegerField(null=False)
+
 class Ranking(EmbeddedModel):
     user_id:int = models.IntegerField(null=False)
-    # ides de mods.
-    posicion_1:list = ArrayField(models.IntegerField(), null=False)
-    posicion_2:list = ArrayField(models.IntegerField(), null=False)
-    posicion_3:list = ArrayField(models.IntegerField(), null=False)
-    posicion_4:list = ArrayField(models.IntegerField(), null=False)
-    posicion_5:list = ArrayField(models.IntegerField(), null=False)
+    posiciones:list = EmbeddedModelArrayField(Posicion, null=True, blank=True)
 
 class Game(models.Model):
     game_id:int = models.IntegerField(null=False, unique=True)

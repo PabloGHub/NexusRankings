@@ -11,11 +11,11 @@ from .models import Game, Mod, Ranking  # ajustar nombres de modelos según tu a
 @require_POST
 def update_ranking(request, game_id):
     try:
-        payload = json.loads(request.body.decode('utf-8'))
+        pld = json.loads(request.body.decode('utf-8'))
     except json.JSONDecodeError:
         return HttpResponseBadRequest('JSON inválido')
 
-    if not isinstance(payload, list):
+    if not isinstance(pld, list):
         return HttpResponseBadRequest('Se esperaba una lista de objetos')
 
     game = get_object_or_404(Game, pk=game_id)
@@ -23,7 +23,7 @@ def update_ranking(request, game_id):
     seen_positions = set()
     new_rankings = []
 
-    for idx, item in enumerate(payload):
+    for idx, item in enumerate(pld):
         if not isinstance(item, dict) or 'position' not in item or 'mod_id' not in item:
             return HttpResponseBadRequest(f'Entrada inválida en índice {idx}')
 
