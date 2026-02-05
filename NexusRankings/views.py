@@ -159,10 +159,10 @@ def __mostrarReputacionMod(request, mod:Mod):
         None
     )
 
-    form.score = rep.score if rep else None
-    form.summary = rep.summary if rep else None
+    form.fields['score'].initial = rep.score if rep else None
+    form.fields['summary'].initial = rep.summary if rep else None
 
-    context = {'datos' : {
+    context = {'datos': {
         "modName": mod.name,
         "form": form
     }}

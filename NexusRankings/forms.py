@@ -23,6 +23,7 @@ class LoguearForm(AuthenticationForm): # AuthenticationForm
 class ReputacionForm(forms.Form):
     score:int = forms.IntegerField(label="Puntuacion" , min_value=0, max_value=5, widget=forms.NumberInput(attrs={'type': 'range'}))
     summary:str = forms.CharField(label='Resumen', max_length=400, widget=forms.Textarea)
+    # texto:str = forms.CharField(label='Texto', max_length=400)
 
     class Meta:
         model = Reputacion
