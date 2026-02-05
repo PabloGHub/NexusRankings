@@ -57,14 +57,14 @@ def guardarRanking(game_id:int, ranking:Ranking):
     Game.objects.using("mongodb").filter(game_id=game_id).update(rankings=jogo.rankings)
 
 
-def masPosicionUno(game_id:int):
+def masPosicion(game_id:int, posicion:int = 1):
     jogo:Game = getGame(game_id)
     if jogo and jogo.rankings:
         count = {}
         for r in jogo.rankings:
             for p in r.posiciones:
-                if p.position == 1:
+                if p.position == posicion:
                     count[p.mod_id] = count.get(p.mod_id, 0) + 1
 
         return {'mod': max(count, key=count.get), 'count': max(count.values())}
-    return {}
+    return None
