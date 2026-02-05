@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 
-from NexusRankings.models import Usuario
+from NexusRankings.models import Usuario, Reputacion
 
 class RegistrarForm(forms.ModelForm):
     contra:str = forms.CharField(label='Contraseña', max_length=100, widget = forms.PasswordInput)
@@ -23,3 +23,7 @@ class LoguearForm(AuthenticationForm): # AuthenticationForm
 class ReputacionForm(forms.Form):
     score:int = forms.IntegerField(label="Puntuacion" , min_value=0, max_value=5, widget=forms.NumberInput(attrs={'type': 'range'}))
     summary:str = forms.CharField(label='Resumen', max_length=400, widget=forms.Textarea)
+
+    class Meta:
+        model = Reputacion
+        fields = ('score', 'summary')
