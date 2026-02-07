@@ -302,15 +302,80 @@ def ranking(request, game_id):
     return __mostrarRanking(request, game_id)
 
 def admin(request):
+    jogos:list = getGames()
+    estadisticas = []
+    for jogo in jogos:
+        estadisticas.append({
+            'juego': jogo,
+            'cantidadMods': getCantidadMods(jogo.game_id),
+            'cantidadPuntuaciones': getCantidadPuntuaciones(jogo.game_id),
+            'cantidadRankings': getCantidadRankings(jogo.game_id)
+        })
+
     migas = [
         ("Inicio", 'index'),
         ("Admin", 'admin')
     ]
     context = {'datos': {
         'migas': migas,
+        'estadisticas': estadisticas,
     }}
     if request.user.is_authenticated and request.user.is_superuser:
         return render(request, 'ranqueo/admin.html', context)
+    else:
+        return inicio(request)
+
+def estadisticasGame(request, game_id:int):
+    return inicio(request)
+
+def estadisticasMod(request, mod_id:int):
+    mod:Mod = getMod(mod_id)
+    datos = estadisticaMod(mod_id)
+
+    migas = [
+        ("Inicio", 'index'),
+        ("Juegos", 'listarGames'),
+        ("Mods", 'listarMods', mod.game_id),
+        (mod.name + " Estadisticas", 'estadisticasMod', mod.mod_id)
+    ]
+    context = {'datos': {
+        'migas': migas,
+        'modName': mod.name,
+        'numJogo' : datos['numJogo'],
+        'numMod': datos['numMod'],
+    }}
+    return render(request, 'ranqueo/estadisticasMod.html', context)
+
+def listarUsuarios(request):
+    if not (request.user.is_authenticated and request.user.is_superuser):
+        return inicio(request)
+
+    usus = Usuario.objects.all()
+    migas = [
+        ("Inicio", 'index'),
+        ("Admin", 'admin'),
+        ("Usuarios", 'listarUsuarios')
+    ]
+    context = {'datos': {
+        'migas': migas,
+        'accion': 2,
+        'items': usus
+    }}
+    return __ir_lista(request, context)
+
+def borrarUsuario(request, user_id:int):
+    if request.user.is_authenticated and request.user.is_superuser:
+        usu = Usuario.objects.filter(id=user_id)
+
+        if usu.exists():
+            if usu.get().is_active:
+                Usuario.objects.filter(id=user_id).update(is_active=False)
+                Usuario.objects.filter(id=user_id).update(is_superuser=False)
+            else:
+                Usuario.objects.filter(id=user_id).update(is_active=True)
+                Usuario.objects.filter(id=user_id).update(is_superuser=False)
+
+        return listarUsuarios(request)
     else:
         return inicio(request)
 

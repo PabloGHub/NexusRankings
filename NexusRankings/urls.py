@@ -15,5 +15,9 @@ urlpatterns = [
     path('borrarGame/<int:game_id>/', views.borrarGame, name='borrarGame'),
     path('borrarMod/<int:mod_id>/', views.borrarMod, name='borrarMod'),
     path("administracion/", views.admin, name="admin"),
+    path("estadisticasGame/<int:game_id>/", views.estadisticasGame, name="estadisticasGame"),
+    path("estadisticasMod/<int:mod_id>/", views.estadisticasMod, name="estadisticasMod"),
+    path("listarUsuarios/", views.listarUsuarios, name="listarUsuarios"),
+    path("borrarUsuario/<int:user_id>/", views.borrarUsuario, name="borrarUsuario"),
 ]
 

@@ -12,12 +12,17 @@
                 <th class="px-2">Ir Mods</th>
                 <th class="px-2">Ranking</th>
                 <th class="px-2">Enlace</th>
-            {% else %}
+            {% elif datos.accion == 1 %}
                 <th class="px-2">Descripcion</th>
                 <th class="px-2">img</th>
                 <th class="px-2">Autor</th>
                 <th class="px-2">Reputacion</th>
+            {% elif datos.accion == 2 %}
+                <th class="px-2">Nombre</th>
+                <th class="px-2">Activo</th>
+                <th class="px-2">Staff</th>
             {% endif %}
+
             {% if user.is_superuser %}
                 <th class="px-2">Admin</th>
             {% endif %}
@@ -27,17 +32,23 @@
         {% for cosa in datos.items %}
             <tr>
                 <th class="px-2">{{ cosa.name }} </th>
-                {% if datos.accion == 0 %}
+
+                {% if datos.accion == 0 %} <!-- Mods -->
                     <th class="px-2">{{ cosa.mods }} </th>
                     <th class="px-2"><a href="{% url 'listarMods' cosa.game_id %}"><button>Ir a {{ cosa.name }}</button></a></th>
                     <th class="px-2"><a href="{% url 'ranking' cosa.game_id %}"><button>Ranking</button></a></th>
                     <th class="px-2"><a href="{{ cosa.nexusmods_url }}">sitio</a></th>
-                {% else %}
+                {% elif datos.accion == 1 %} <!-- Juegos -->
                     <th class="px-2"><p>{{ cosa.summary }}</p></th>
                     <th class="px-2"><img src="{{ cosa.picture_url }}" alt=""></th>
                     <th class="px-2"><p>{{ cosa.author }}</p></th>
                     <th class="px-2"><a href="{% url 'mod' cosa.mod_id %}"><button>Valoracion</button></a></th>
+                {% elif datos.accion == 2 %} <!-- Usuarios -->
+                    <th class="px-2"><p>{{ cosa.nombre }}</p></th>
+                    <th class="px-2"><p>{{ cosa.is_active }}</p></th>
+                    <th class="px-2"><p>{{ cosa.is_staff }}</p></th>
                 {% endif %}
+
                 {% if user.is_superuser %}
                     {% if datos.accion == 0 %}
                         <th class="px-2">
@@ -46,11 +57,19 @@
                             ID: {{ cosa.game_id }}
                         </th>
 
-                    {% else %}
+                    {% elif datos.accion == 1 %}
                         <th class="px-2">
                             <a href="{% url 'borrarMod' cosa.mod_id %}"><button>Eliminar</button></a>
                             <br>
                             ID: {{ cosa.mod_id }}
+                            <br>
+                            <a href="{% url 'estadisticasMod' cosa.mod_id %}"><button>Estadisticas</button></a>
+                        </th>
+                    {% elif datos.accion == 2 %}
+                        <th class="px-2">
+                            <a href="{% url 'borrarUsuario' cosa.id %}"><button>Eliminar</button></a>
+                            <br>
+                            ID: {{ cosa.id }}
                         </th>
                     {% endif %}
                 {% endif %}

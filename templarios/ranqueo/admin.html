@@ -12,8 +12,36 @@
                 <a href="{% url 'listarGames' %}" class=""><button>Lista de Juegos</button></a>
                 <a href="{% url 'importarGames' %}"><button>Importar Juegos</button></a>
                 <a href="{% url 'importarMods' %}"><button>Importar Mods</button></a>
-                <a href="#"><button>Ver Estadisticas</button></a>
+                <a href="{% url 'listarUsuarios' %}"><button>Lista Usuarios</button></a>
                 <a href="/admin"><button>Admin DJango</button></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+
+                <table class="table table-success table-hover">
+                    <thead>
+                        <tr>
+                            <th class="px-2">Juego</th>
+                            <th class="px-2">Cantidad de Mods</th>
+                            <th class="px-2">Cantidad de Puntuaciones</th>
+                            <th class="px-2">Cantidad de Rankings</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in datos.estadisticas %}
+                            <tr>
+                                <th class="px-2">{{ item.juego.name }} </th>
+                                <td class="px-2">{{ item.cantidadMods }} </td>
+                                <td class="px-2">{{ item.cantidadPuntuaciones }} </td>
+                                <td class="px-2">{{ item.cantidadRankings }} </td>
+                            </tr>
+                        {% empty %}
+                            <p>Sin Juegos</p>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
             </div>
         </div>
     </div>
