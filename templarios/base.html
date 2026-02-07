@@ -12,8 +12,24 @@
     <body>
         <header>
             <h1>NexusRanking-{% block title %} In-Titulado {% endblock %}</h1>
+
+            <p>
+                {% for item in datos.migas %}
+                    {% with name=item.0 the_url=item.1 argumento=item.2 %}
+                        {% if the_url %}
+                            {% if argumento %}
+                                <a href="{% url the_url argumento %}">{{ name }}</a> /
+                            {% else %}
+                                <a href="{% url the_url %}">{{ name }}</a> /
+                            {% endif %}
+                        {% else %}
+                            <span>{{ name }}</span>
+                        {% endif %}
+                    {% endwith %}
+                {% endfor %}
+            </p>
             <br>
-            <a href="{% url 'index' %}"><button>Inicio</button></a>
+
             {% if user.is_authenticated %}
                 <a href="{% url 'desLoguearse' %}"><button>CerrarSesion</button></a>
                 <a href="{% url 'importarGames' %}"><button>Importar Juegos</button></a>

@@ -18,6 +18,9 @@
                 <th class="px-2">Autor</th>
                 <th class="px-2">Reputacion</th>
             {% endif %}
+            {% if user.is_superuser %}
+                <th class="px-2">Admin</th>
+            {% endif %}
         </tr>
     </thead>
     <tbody>
@@ -34,6 +37,9 @@
                     <th class="px-2"><img src="{{ cosa.picture_url }}" alt=""></th>
                     <th class="px-2"><p>{{ cosa.author }}</p></th>
                     <th class="px-2"><a href="{% url 'mod' cosa.mod_id %}"><button>Valoracion</button></a></th>
+                {% endif %}
+                {% if user.is_superuser %}
+                    <th class="px-2"><a href="#"><button>Eliminar</button></a></th>
                 {% endif %}
             </tr>
         {% empty %}

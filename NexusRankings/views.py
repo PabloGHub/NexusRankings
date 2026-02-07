@@ -20,7 +20,12 @@ def __ir_lista(request, context):
 
 def listarGames(request):
     datos = getGames()
+    migas = [
+        ("Inicio", 'index'),
+        ("Juegos", 'listarGames')
+    ]
     context = {'datos' : {
+        "migas" : migas,
         "tipo": "Juegos",
         "accion" : 0,
         "items": datos
@@ -29,7 +34,13 @@ def listarGames(request):
 
 def listarMods(request, game_id):
     datos = getMods(game_id)
+    migas = [
+        ("Inicio", 'index'),
+        ("Juegos", 'listarGames'),
+        ("Mods", 'listarMods', game_id)
+    ]
     context = {'datos': {
+        "migas" : migas,
         "tipo": "Mods",
         "accion" : 1,
         "items": datos
@@ -43,7 +54,12 @@ def __ir_sesion(request, context):
         return render(request, 'ranqueo/sesion.html', context)
 
 def __ir_registro(request, form:RegistrarForm):
+    migas = [
+        ("Inicio", 'index'),
+        ("Registrarse", 'registrarse')
+    ]
     context = {'datos': {
+        "migas" : migas,
         "accionNom": "Registrarse",
         "accionTipo" : 0,
         "form": form
@@ -73,7 +89,12 @@ def registrarse(request):
         return __ir_registro(request, RegistrarForm())
 
 def __ir_logueo(request, form:LoguearForm):
+    migas = [
+        ("Inicio", 'index'),
+        ("Loguearse", 'loguearse')
+    ]
     context = {'datos': {
+        'migas': migas,
         "accionNom": "Iniciar Sesión",
         "accionTipo" : 1,
         "form": form
@@ -119,7 +140,13 @@ def __importarJuegos(request, context):
     return __ir_importacion(request, context)
 
 def importarGames(request):
+    migas = [
+        ("Inicio", 'index'),
+        ("Admin", '#'),
+        ("Importar Juegos", 'importarGames')
+    ]
     context = {'datos' : {
+        'migas': migas,
         "tipo": "Juegos",
         "accion" : 0
     }}
@@ -137,7 +164,13 @@ def __importarMods(request, context):
     return __ir_importacion(request, context)
 
 def importarMods(request):
+    migas = [
+        ("Inicio", 'index'),
+        ("Admin", '#'),
+        ("Importar Mods", 'importarMods')
+    ]
     context = {'datos' : {
+        'migas': migas,
         "tipo": "Mods",
         "accion" : 1
     }}
@@ -164,7 +197,14 @@ def __mostrarReputacionMod(request, mod:Mod):
     form.fields['score'].initial = rep.score if rep else None
     form.fields['summary'].initial = rep.summary if rep else None
 
+    migas = [
+        ("Inicio", 'index'),
+        ("Juegos", 'listarGames'),
+        ("Mods", 'listarMods', mod.game_id),
+        (mod.name, 'mod', mod.mod_id)
+    ]
     context = {'datos': {
+        'migas': migas,
         "modName": mod.name,
         "form": form
     }}
@@ -218,7 +258,13 @@ def __mostrarRanking(request, game_id):
     jogo:Game = getGame(game_id)
     mods = getMods(game_id)
 
+    migas = [
+        ("Inicio", 'index'),
+        ("Juegos", 'listarGames'),
+        ("Ranking", 'ranking', game_id)
+    ]
     context = {'datos': {
+        'migas': migas,
         "gameName": jogo.name,
         "game": jogo,
         "mods": mods,
