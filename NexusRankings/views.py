@@ -142,7 +142,7 @@ def __importarJuegos(request, context):
 def importarGames(request):
     migas = [
         ("Inicio", 'index'),
-        ("Admin", '#'),
+        ("Admin", 'index'),
         ("Importar Juegos", 'importarGames')
     ]
     context = {'datos' : {
@@ -166,7 +166,7 @@ def __importarMods(request, context):
 def importarMods(request):
     migas = [
         ("Inicio", 'index'),
-        ("Admin", '#'),
+        ("Admin", 'index'),
         ("Importar Mods", 'importarMods')
     ]
     context = {'datos' : {
@@ -300,3 +300,15 @@ def ranking(request, game_id):
     if request.method == "POST":
         return __guardarRanking(request, game_id)
     return __mostrarRanking(request, game_id)
+
+
+def borrarGame(request, game_id):
+    if request.user.is_authenticated and request.user.is_superuser:
+        delGame(game_id)
+    return listarGames(request)
+
+def borrarMod(request, mod_id):
+    game_id = getMod(mod_id).game_id
+    if request.user.is_authenticated and request.user.is_superuser:
+        delMod(mod_id)
+    return listarMods(request, game_id)

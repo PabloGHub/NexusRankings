@@ -39,7 +39,11 @@
                     <th class="px-2"><a href="{% url 'mod' cosa.mod_id %}"><button>Valoracion</button></a></th>
                 {% endif %}
                 {% if user.is_superuser %}
-                    <th class="px-2"><a href="#"><button>Eliminar</button></a></th>
+                    {% if datos.accion == 0 %}
+                        <th class="px-2"><a href="{% url 'borrarGame' cosa.game_id %}"><button>Eliminar</button></a></th>
+                    {% else %}
+                        <th class="px-2"><a href="{% url 'borrarMod' cosa.mod_id %}"><button>Eliminar</button></a></th>
+                    {% endif %}
                 {% endif %}
             </tr>
         {% empty %}
