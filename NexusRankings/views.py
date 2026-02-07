@@ -331,7 +331,7 @@ def estadisticasGame(request, game_id:int):
 def estadisticasMod(request, mod_id:int):
     mod:Mod = getMod(mod_id)
     datos = estadisticaMod(mod_id)
-
+    estadisticasUsuario(1)
     migas = [
         ("Inicio", 'index'),
         ("Juegos", 'listarGames'),

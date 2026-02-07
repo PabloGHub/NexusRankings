@@ -127,25 +127,24 @@ def estadisticaMod(mod_id:int):
 
 def estadisticasUsuario(user_id:int):
     juegos = getGames()
-    mods = []
-    for jogo in juegos:
-        if jogo.rankings:
-            for r in jogo.rankings:
+    estadistica = []
+    for j in juegos:
+        ranking = getRanking(j.game_id, user_id)
+        estadisJogo = {
+            "juego": j,
+            "ranking": ranking,
+        }
+        mods = getMods(j.game_id)
+        for m in mods:
+            for r in (m.reputaciones or []):
                 if r.user_id == user_id:
-                    mods.extend(r.posiciones)
+                    estadisJogo['mod'] = m
+                    estadisJogo['score'] = r.score
+                    estadistica.append(estadisJogo)
+    return estadistica
 
-    puntuaciones = {}
-    for mod in mods:
-        m = getMod(mod.mod_id)
-        if m and m.reputaciones:
-            for r in m.reputaciones:
-                if r.user_id == user_id:
-                    puntuaciones[mod.mod_id] = r.score
 
-    return {
-        'mods': mods,
-        'puntuaciones': puntuaciones,
-    }
+
 
 def getCantidadMods(game_id:int):
     mods:list = getMods(game_id)
