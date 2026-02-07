@@ -32,8 +32,9 @@
 
             {% if user.is_authenticated %}
                 <a href="{% url 'desLoguearse' %}"><button>CerrarSesion</button></a>
-                <a href="{% url 'importarGames' %}"><button>Importar Juegos</button></a>
-                <a href="{% url 'importarMods' %}"><button>Importar Mods</button></a>
+                {% if user.is_superuser %}
+                    <a href="{% url 'admin' %}"><button>Admin</button></a>
+                {% endif %}
             {% else %}
                 <a href="{% url 'loguearse' %}"><button>IniciarSesion</button></a>
                 <a href="{% url 'registrarse' %}"><button>Registrarse</button></a>

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %} Administracion {% endblock %}
+
+{% block content %}
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col text-center">
+                <h2>Panel de Administración</h2>
+                <p>Gestiona los mods y usuarios de Nexus Ranking.</p>
+                <a href="{% url 'listarGames' %}" class=""><button>Lista de Juegos</button></a>
+                <a href="{% url 'importarGames' %}"><button>Importar Juegos</button></a>
+                <a href="{% url 'importarMods' %}"><button>Importar Mods</button></a>
+                <a href="#"><button>Ver Estadisticas</button></a>
+                <a href="/admin"><button>Admin DJango</button></a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

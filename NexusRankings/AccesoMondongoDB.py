@@ -56,7 +56,7 @@ def guardarRanking(game_id:int, ranking:Ranking):
 
     Game.objects.using("mongodb").filter(game_id=game_id).update(rankings=jogo.rankings)
 
-
+# mods que esten en la posicion x de los rankings.
 def masPosicion(game_id:int, posicion:int = 1):
     jogo:Game = getGame(game_id)
     if jogo and jogo.rankings:
@@ -66,5 +66,18 @@ def masPosicion(game_id:int, posicion:int = 1):
                 if p.position == posicion:
                     count[p.mod_id] = count.get(p.mod_id, 0) + 1
 
+        return {'mod': max(count, key=count.get), 'count': max(count.values())}
+    return None
+
+# mods que tengan una puntuacion x en las reputaciones.
+def masPuntuacion(game_id:int, puntuacion:int = 1):
+    mods = getMods(game_id)
+    count = {}
+    for mod in mods:
+        for r in (mod.reputaciones or []):
+            if r.score == puntuacion:
+                count[mod.mod_id] = count.get(mod.mod_id, 0) + 1
+
+    if count:
         return {'mod': max(count, key=count.get), 'count': max(count.values())}
     return None

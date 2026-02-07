@@ -142,7 +142,7 @@ def __importarJuegos(request, context):
 def importarGames(request):
     migas = [
         ("Inicio", 'index'),
-        ("Admin", 'index'),
+        ("Admin", 'admin'),
         ("Importar Juegos", 'importarGames')
     ]
     context = {'datos' : {
@@ -166,7 +166,7 @@ def __importarMods(request, context):
 def importarMods(request):
     migas = [
         ("Inicio", 'index'),
-        ("Admin", 'index'),
+        ("Admin", 'admin'),
         ("Importar Mods", 'importarMods')
     ]
     context = {'datos' : {
@@ -301,6 +301,18 @@ def ranking(request, game_id):
         return __guardarRanking(request, game_id)
     return __mostrarRanking(request, game_id)
 
+def admin(request):
+    migas = [
+        ("Inicio", 'index'),
+        ("Admin", 'admin')
+    ]
+    context = {'datos': {
+        'migas': migas,
+    }}
+    if request.user.is_authenticated and request.user.is_superuser:
+        return render(request, 'ranqueo/admin.html', context)
+    else:
+        return inicio(request)
 
 def borrarGame(request, game_id):
     if request.user.is_authenticated and request.user.is_superuser:
