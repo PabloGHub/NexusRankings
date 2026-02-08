@@ -1,68 +1,71 @@
 {% extends 'base.html' %}
 
-{% block title %} Estadisticas de Juegos {% endblock %}
+{% block title %} Estadisticas de {{ datos.modName }} {% endblock %}
 
 {% block content %}
 
-    <h2>{{ datos.modName }}</h2>
+    <h2 class="my-3">{{ datos.modName }}</h2>
 
-    <div class="row">
-        <div class="col-md-5">
+    <div class="container">
+        
+        <div class="row">
+            <div class="col-md-5">
+                
+                <table class="tabla">
+                    <tbody>
+                        <tr>
+                            <td>Posicionado 1</td>
+                            <td>{{ datos.numJogo.pos1 }}</td>
+                        </tr>
+                        <tr>
+                            <td>Posicionado 2</td>
+                            <td>{{ datos.numJogo.pos2 }}</td>
+                        </tr>
+                        <tr>
+                            <td>Posicionado 3</td>
+                            <td>{{ datos.numJogo.pos3 }}</td>
+                        </tr>
+                        <tr>
+                            <td>Posicionado 4</td>
+                            <td>{{ datos.numJogo.pos4 }}</td>
+                        </tr>
+                        <tr>
+                            <td>Posicionado 5</td>
+                            <td>{{ datos.numJogo.pos5 }}</td>
+                        </tr>
+                    </tbody>
+                </table>
 
-            <table class="table table-success table-hover">
-                <tbody>
-                    <tr>
-                        <th>Posicionado 1</th>
-                        <td>{{ datos.numJogo.pos1 }}</td>
-                    </tr>
-                    <tr>
-                        <th>Posicionado 2</th>
-                        <td>{{ datos.numJogo.pos2 }}</td>
-                    </tr>
-                    <tr>
-                        <th>Posicionado 3</th>
-                        <td>{{ datos.numJogo.pos3 }}</td>
-                    </tr>
-                    <tr>
-                        <th>Posicionado 4</th>
-                        <td>{{ datos.numJogo.pos4 }}</td>
-                    </tr>
-                    <tr>
-                        <th>Posicionado 5</th>
-                        <td>{{ datos.numJogo.pos5 }}</td>
-                    </tr>
-                </tbody>
-            </table>
+            </div>
 
-        </div>
+            <div class="col-md-5">
 
-        <div class="col-md-5">
+                <table class="tabla">
+                    <tbody>
+                        <tr>
+                            <td>Puntuaciones de 1</td>
+                            <td>{{ datos.numMod.score1 }}</td>
+                        </tr>
+                        <tr>
+                            <td>Puntuaciones de 2</td>
+                            <td>{{ datos.numMod.score2 }}</td>
+                        </tr>
+                        <tr>
+                            <td>Puntuaciones de 3</td>
+                            <td>{{ datos.numMod.score3 }}</td>
+                        </tr>
+                        <tr>
+                            <td>Puntuaciones de 1</td>
+                            <td>{{ datos.numMod.score4 }}</td>
+                        </tr>
+                        <tr>
+                            <td>Puntuaciones de 5</td>
+                            <td>{{ datos.numMod.score5 }}</td>
+                        </tr>
+                    </tbody>
+                </table>
 
-            <table class="table table-striped">
-                <tbody>
-                    <tr>
-                        <th>Puntuaciones de 1</th>
-                        <td>{{ datos.numMod.score1 }}</td>
-                    </tr>
-                    <tr>
-                        <th>Puntuaciones de 2</th>
-                        <td>{{ datos.numMod.score2 }}</td>
-                    </tr>
-                    <tr>
-                        <th>Puntuaciones de 3</th>
-                        <td>{{ datos.numMod.score3 }}</td>
-                    </tr>
-                    <tr>
-                        <th>Puntuaciones de 1</th>
-                        <td>{{ datos.numMod.score4 }}</td>
-                    </tr>
-                    <tr>
-                        <th>Puntuaciones de 5</th>
-                        <td>{{ datos.numMod.score5 }}</td>
-                    </tr>
-                </tbody>
-            </table>
-
+            </div>
         </div>
     </div>
 

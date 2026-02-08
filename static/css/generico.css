@@ -1,0 +1,99 @@
+
+hr
+{
+    line-height: 1.5;
+    margin: 0px;
+}
+
+.cabecera
+{
+    border-bottom: 2px solid rgba(117, 117, 117, 0.8);
+}
+
+img
+{
+    max-width: 300px;
+}
+
+
+
+/* Textarea */
+.campo-texto
+{
+    width: 100%;
+    min-height: 180px;
+    padding: 12px;
+    border: 2px solid #2f2f2f;
+    border-radius: 8px;
+    background-color: #111;
+    color: #f0f0f0;
+    box-shadow: 0 0 0 2px transparent;
+    outline: none;
+}
+.campo-texto:focus
+{
+    border-color: #fb923c;
+    box-shadow: 0 0 0 2px rgba(251,146,60,.35);
+}
+
+/* Slider */
+.rango
+{
+    width: 220px;
+}
+.rango::-webkit-slider-runnable-track
+{
+    height: 6px;
+    background: #2f2f2f;
+    border-radius: 999px;
+}
+.rango::-webkit-slider-thumb
+{
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    background: #fb923c;
+    border: 2px solid #aa530b;
+    border-radius: 50%;
+    margin-top: -6px;
+}
+.rango:focus::-webkit-slider-thumb
+{
+    box-shadow: 0 0 0 3px rgba(251,146,60,.35);
+}
+
+
+/* Sesion y DesSesion */
+.formulario
+{
+    max-width: 420px;
+    padding: 16px;
+    border: 1px solid rgba(255,255,255,.15);
+    background: rgba(0,0,0,.35);
+    backdrop-filter: blur(4px);
+}
+
+.formulario label
+{
+    display: inline-block;
+    min-width: 140px;
+    margin-bottom: 6px;
+}
+
+.formulario input[type="text"],
+.formulario input[type="password"]
+{
+    width: 220px;
+    padding: 6px 8px;
+    border: 2px solid #2f2f2f;
+    background: #111;
+    color: #f0f0f0;
+}
+
+.formulario input[type="text"]:focus,
+.formulario input[type="password"]:focus
+{
+    border-color: #fb923c;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(251,146,60,.35);
+}

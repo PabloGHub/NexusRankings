@@ -1,0 +1,81 @@
+/* css para Botones y Enlaces*/
+
+.nbtn
+{
+    background-color: #fb923c;
+    border: 2px solid #aa530b;
+    border-radius: 0;
+    color: #1f1f1f;
+    font-family: Arial, sans-serif;
+
+    padding: 2px 3px;
+    margin: 2px 3px;
+
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+
+    min-width: 100px;
+}
+
+.nbtn:hover
+{
+    background-color: #f97316;
+    border-color: #8a3f06;
+    cursor: pointer;
+}
+
+.nbtn:active
+{
+    background-color: #ea580c;
+    border-color: #7c2d12;
+    transform: translateY(1px);
+}
+
+
+.nbtn-pri
+{
+    background-color: #4CAF50;
+    border: 2px solid #0f5311;
+    border-radius: 0;
+    color: #1f1f1f;
+    font-family: Arial, sans-serif;
+
+    padding: 2px 3px;
+    margin: 2px 3px;
+
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    
+    min-width: 100px;
+}
+
+.nbtn-pri:hover
+{
+    background-color: #45a049;
+    border-color: #0b3d0b;
+    cursor: pointer;
+}
+
+.nbtn-pri:active
+{
+    background-color: #3e8e41;
+    border-color: #0a2c0a;
+    transform: translateY(1px);
+}
+
+
+
+.enlace
+{
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+.enlace:hover
+{
+    text-decoration: dotted cornflowerblue;
+}

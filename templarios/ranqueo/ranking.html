@@ -5,12 +5,12 @@
 <!-- Los tipos de ranking los decide el admin -->
 {% block content %}
     <div class="container-fluid">
-        <h3>{{ datos.gameName }}</h3>
+        <h3 class="my-3">{{ datos.gameName }}</h3>
         
         <div class="row">
             <div class="col-md-6">
                 <h4>Ranking</h4>
-                <table class="table table-success table-hover">
+                <table class="tabla">
                     <thead>
                         <tr>
                             <th class="px-2 col-md-1">Posición</th>
@@ -39,7 +39,7 @@
 
             <div class="col-md-6">
                 <h4>Lista de Mods</h4>
-                <ul id="ranking-list" class="list-group">
+                <ul id="ranking-list" class="lista">
                   {% for m in datos.mods %}
                     <li class="list-group-item mod-item" data-id="{{ m.mod_id }}" draggable="true">
                       {{ m.name }} - {{ m.author }}
@@ -74,8 +74,8 @@
         }
         
         .mod-in-ranking {
-            background-color: #d4edda;
-            border: 1px solid #c3e6cb;
+            background-color: rgba(255, 140, 0, 0.5);
+            border: 1px solid #4CAF50;
             padding: 5px 10px;
             border-radius: 4px;
             position: relative;

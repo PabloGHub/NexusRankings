@@ -1,0 +1,50 @@
+.mybody
+{
+    background-color: #0f0f10;
+    margin: 0;
+    padding: 0;
+
+    font-family: Arial, sans-serif;
+    color: #f0f0f0;
+}
+
+.cuerpo
+{
+    background-size: cover;
+    background-position: center;
+}
+
+.hero
+{
+    position: relative;
+    min-height: 80vh;
+}
+
+.fondo-paginaPrincipal
+{
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+
+    /*background-image: url('../fondo.webp');*/
+    background-image: var(--fondo);
+    background-size: cover;
+    background-position: top center;
+}
+
+.fondo-paginaPrincipal::before
+{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(15,15,16,0.66) 0%, rgba(15,15,16,1) 100%);
+    pointer-events: none;
+}
+
+.contenido-hero
+{
+    padding-top: 2px;
+    position: relative;
+    z-index: 1;
+}
+

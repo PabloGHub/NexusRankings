@@ -1,0 +1,7 @@
+:root
+{
+    --fondo-inicio: url('../fondo.webp');
+    --fondo-mod: url('../fondoGame.jpg');
+
+    --fondo: var(--fondo-mod);
+}

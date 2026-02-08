@@ -1,0 +1,47 @@
+
+.tabla {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+    /*border: 2px solid rgba(255, 255, 255, 0.8);*/
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+}
+
+.tabla thead {
+    background-color: rgba(255, 140, 0, 0.5);
+    color: white;
+}
+
+.tabla th {
+    padding: 12px;
+    text-align: left;
+    font-weight: bold;
+}
+
+.tabla td {
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.tabla tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+.lista
+{
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+}
+
+.lista li
+{
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}

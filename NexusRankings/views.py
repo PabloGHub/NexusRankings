@@ -261,11 +261,15 @@ def __mostrarRanking(request, game_id):
 
 
     pos = [ ]
-    for p in r.posiciones:
-        pos.append({"position": p.position,
-                    "mod_id": p.mod_id,
-                    "name": next((m.name for m in mods if m.mod_id == p.mod_id), "Desconocido"),
-                    "author": next((m.author for m in mods if m.mod_id == p.mod_id), "Desconocido")})
+    if r and getattr(r, 'posiciones', None):
+        for p in r.posiciones:
+            pos.append({
+                "position": p.position,
+                "mod_id": p.mod_id,
+                "name": next((m.name for m in mods if m.mod_id == p.mod_id), "Desconocido"),
+                "author": next((m.author for m in mods if m.mod_id == p.mod_id), "Desconocido")
+            })
+
 
     migas = [
         ("Inicio", 'index'),

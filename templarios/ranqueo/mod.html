@@ -3,10 +3,12 @@
 {% block title %} {{ datos.modName }} {% endblock %}
 
 {% block content %}
-    <h2>{{ datos.modName }}</h2>
-    <form method="post">
+    <h2 class="my-3">{{ datos.modName }}</h2>
+
+    <form method="post" class="formulario">
         {% csrf_token %}
         {{ datos.form.as_p }}
-        <button type="submit">Guardar</button>
+        <hr class="my-3">
+        <button type="submit" class="nbtn-pri">Guardar</button>
     </form>
 {% endblock %}

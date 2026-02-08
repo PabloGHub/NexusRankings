@@ -7,19 +7,25 @@
     <div class="container mt-4">
         <div class="row">
             <div class="col text-center">
+
                 <h2>Panel de Administración</h2>
                 <p>Gestiona los mods y usuarios de Nexus Ranking.</p>
-                <a href="{% url 'listarGames' %}" class=""><button>Lista de Juegos</button></a>
-                <a href="{% url 'importarGames' %}"><button>Importar Juegos</button></a>
-                <a href="{% url 'importarMods' %}"><button>Importar Mods</button></a>
-                <a href="{% url 'listarUsuarios' %}"><button>Lista Usuarios</button></a>
-                <a href="/admin"><button>Admin DJango</button></a>
+
+                <a href="{% url 'listarGames' %}" class="nbtn">Lista de Juegos</a>
+                <a href="{% url 'importarGames' %}" class="nbtn">Importar Juegos</a>
+                <a href="{% url 'importarMods' %}" class="nbtn">Importar Mods</a>
+                <a href="{% url 'listarUsuarios' %}" class="nbtn">Lista Usuarios</a>
+                <a href="/admin" class="nbtn">Admin DJango</a>
+
             </div>
         </div>
         <div class="row">
             <div class="col text-center">
-
-                <table class="table table-success table-hover">
+                <br>
+                <h2>Estadisticas</h2>
+                <p>Informacion sobre los juegos, mods y usuarios de Nexus Ranking.</p>
+    
+                <table class="tabla">
                     <thead>
                         <tr>
                             <th class="px-2">Juego</th>

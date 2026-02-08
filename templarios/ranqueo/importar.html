@@ -4,19 +4,19 @@
 
 {% block content %}
 
-    <h3>Cosa</h3>
+    <h3 class="my-3">Importar {{ datos.tipo }}</h3>
 
-    <form id="js_form" method="post" enctype="multipart/form-data">
+    <form id="js_form" method="post" enctype="multipart/form-data" class="formulario">
         {% csrf_token %}
 
         <div>
-            <label for="js_file">Seleccionar archivo Json del </label> <br>
-            <input type="file" id="js_file" name="js_file" accept=".js" required>
+            <label for="js_file">Seleccionar archivo Json</label> <br>
+
+            <input type="file" id="js_file" name="js_file" accept=".js" required class="nbtn">
         </div>
 
         <div>
-            <button type="button" id="previewBtn">Previsualizar</button>
-            <button type="submit">Guardar</button>
+            <button type="submit" class="nbtn-pri">Guardar</button>
         </div>
     </form>
 

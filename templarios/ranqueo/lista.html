@@ -3,8 +3,8 @@
 {% block title %}{{ datos.tipo }}{% endblock %}
 
 {% block content %}
-    <table class="table table-success table-hover"> <!-- table table-primary -->
-    <thead>
+    <table class="tabla"> <!-- table table-primary -->
+    <thead class="cabecera">
         <tr>
             <th class="px-2">{{ datos.tipo }}</th>
             {% if datos.accion == 0 %}
@@ -34,43 +34,43 @@
                 <th class="px-2">{{ cosa.name }} </th>
 
                 {% if datos.accion == 0 %} <!-- Mods -->
-                    <th class="px-2">{{ cosa.mods }} </th>
-                    <th class="px-2"><a href="{% url 'listarMods' cosa.game_id %}"><button>Ir a {{ cosa.name }}</button></a></th>
-                    <th class="px-2"><a href="{% url 'ranking' cosa.game_id %}"><button>Ranking</button></a></th>
-                    <th class="px-2"><a href="{{ cosa.nexusmods_url }}">sitio</a></th>
+                    <td class="px-2">{{ cosa.mods }} </td>
+                    <td class="px-2"><a href="{% url 'listarMods' cosa.game_id %}" class="nbtn">Ir a {{ cosa.name }}</a></td>
+                    <td class="px-2"><a href="{% url 'ranking' cosa.game_id %}" class="nbtn">Ranking</a></td>
+                    <td class="px-2"><a href="{{ cosa.nexusmods_url }}" class="enlace">sitio</a></td>
                 {% elif datos.accion == 1 %} <!-- Juegos -->
-                    <th class="px-2"><p>{{ cosa.summary }}</p></th>
-                    <th class="px-2"><img src="{{ cosa.picture_url }}" alt=""></th>
-                    <th class="px-2"><p>{{ cosa.author }}</p></th>
-                    <th class="px-2"><a href="{% url 'mod' cosa.mod_id %}"><button>Valoracion</button></a></th>
+                    <td class="px-2"><p>{{ cosa.summary }}</p></td>
+                    <td class="px-2"><img src="{{ cosa.picture_url }}" alt=""></td>
+                    <td class="px-2"><p>{{ cosa.author }}</p></td>
+                    <td class="px-2"><a href="{% url 'mod' cosa.mod_id %}" class="enlace">Valoracion</a></td>
                 {% elif datos.accion == 2 %} <!-- Usuarios -->
-                    <th class="px-2"><p>{{ cosa.nombre }}</p></th>
-                    <th class="px-2"><p>{{ cosa.is_active }}</p></th>
-                    <th class="px-2"><p>{{ cosa.is_staff }}</p></th>
+                    <td class="px-2"><p>{{ cosa.nombre }}</p></td>
+                    <td class="px-2"><p>{{ cosa.is_active }}</p></td>
+                    <td class="px-2"><p>{{ cosa.is_staff }}</p></td>
                 {% endif %}
 
                 {% if user.is_superuser %}
                     {% if datos.accion == 0 %}
-                        <th class="px-2">
-                            <a href="{% url 'borrarGame' cosa.game_id %}"><button>Eliminar</button></a>
+                        <td class="px-2">
+                            <a href="{% url 'borrarGame' cosa.game_id %}" class="nbtn">Eliminar</a>
                             <br>
                             ID: {{ cosa.game_id }}
-                        </th>
+                        </td>
 
                     {% elif datos.accion == 1 %}
-                        <th class="px-2">
-                            <a href="{% url 'borrarMod' cosa.mod_id %}"><button>Eliminar</button></a>
+                        <td class="px-2">
+                            <a href="{% url 'borrarMod' cosa.mod_id %}" class="nbtn">Eliminar</a>
                             <br>
                             ID: {{ cosa.mod_id }}
                             <br>
-                            <a href="{% url 'estadisticasMod' cosa.mod_id %}"><button>Estadisticas</button></a>
-                        </th>
+                            <a href="{% url 'estadisticasMod' cosa.mod_id %}" class="nbtn">Estadisticas</a>
+                        </td>
                     {% elif datos.accion == 2 %}
-                        <th class="px-2">
-                            <a href="{% url 'borrarUsuario' cosa.id %}"><button>Eliminar</button></a>
+                        <td class="px-2">
+                            <a href="{% url 'borrarUsuario' cosa.id %}" class="nbtn">Eliminar</a>
                             <br>
                             ID: {{ cosa.id }}
-                        </th>
+                        </td>
                     {% endif %}
                 {% endif %}
             </tr>
