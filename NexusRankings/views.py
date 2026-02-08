@@ -257,6 +257,15 @@ def __ir_ranking(request, context):
 def __mostrarRanking(request, game_id):
     jogo:Game = getGame(game_id)
     mods = getMods(game_id)
+    r:Ranking = getRanking(game_id, request.user.id)
+
+
+    pos = [ ]
+    for p in r.posiciones:
+        pos.append({"position": p.position,
+                    "mod_id": p.mod_id,
+                    "name": next((m.name for m in mods if m.mod_id == p.mod_id), "Desconocido"),
+                    "author": next((m.author for m in mods if m.mod_id == p.mod_id), "Desconocido")})
 
     migas = [
         ("Inicio", 'index'),
@@ -266,7 +275,8 @@ def __mostrarRanking(request, game_id):
     context = {'datos': {
         'migas': migas,
         "gameName": jogo.name,
-        "game": jogo,
+        "gameId": jogo.game_id,
+        "ranking": pos,
         "mods": mods,
     }}
     return __ir_ranking(request, context)
@@ -331,7 +341,8 @@ def estadisticasGame(request, game_id:int):
 def estadisticasMod(request, mod_id:int):
     mod:Mod = getMod(mod_id)
     datos = estadisticaMod(mod_id)
-    estadisticasUsuario(1)
+    # estadisticasUsuario(1)
+
     migas = [
         ("Inicio", 'index'),
         ("Juegos", 'listarGames'),

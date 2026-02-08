@@ -18,26 +18,21 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% for pos in "12345"|make_list %}
                         <tr>
-                            <td class="px-2">1</td>
-                            <td class="px-2 drop-zone" data-position="1"></td>
+                            <td class="px-2">{{ pos }}</td>
+                            <td class="px-2 drop-zone" data-position="{{ pos }}">
+                                {% for r in datos.ranking %}
+                                    {% if r.position|stringformat:"s" == pos %}
+                                        <div class="mod-in-ranking" data-id="{{ r.mod_id }}">
+                                            {{ r.name }} - {{ r.author }}
+                                            <span class="remove-btn" onclick="removeFromRanking(this)">✕</span>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
                         </tr>
-                        <tr>
-                            <td class="px-2">2</td>
-                            <td class="px-2 drop-zone" data-position="2"></td>
-                        </tr>
-                        <tr>
-                            <td class="px-2">3</td>
-                            <td class="px-2 drop-zone" data-position="3"></td>
-                        </tr>
-                        <tr>
-                            <td class="px-2">4</td>
-                            <td class="px-2 drop-zone" data-position="4"></td>
-                        </tr>
-                        <tr>
-                            <td class="px-2">5</td>
-                            <td class="px-2 drop-zone" data-position="5"></td>
-                        </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
@@ -54,8 +49,7 @@
             </div>
         </div>
 
-        <input type="hidden" id="gameId" value="{{ datos.game.game_id }}">
-        <!-- <button onclick="saveRanking()">Guardar Ranking</button> -->
+        <input type="hidden" id="gameId" value="{{ datos.gameId }}">
     </div>
 
     <style>
@@ -97,6 +91,16 @@
 
     <script>
         let draggedElement = null;
+
+        // Marcar mods ya rankeados como deshabilitados
+        document.querySelectorAll('.mod-in-ranking').forEach(el => {
+            const id = el.dataset.id;
+            const item = document.querySelector('.mod-item[data-id="' + id + '"]');
+            if (item) {
+                item.classList.add('disabled');
+                item.setAttribute('draggable', 'false');
+            }
+        });
 
         // Agregar eventos a los mods
         document.querySelectorAll('.mod-item').forEach(item => {
@@ -146,7 +150,6 @@
             if (draggedElement) {
                 const modId = draggedElement.dataset.id;
                 const modName = draggedElement.textContent.trim();
-                const position = this.dataset.position;
 
                 // Limpiar el contenido anterior si existe
                 this.innerHTML = '';
@@ -159,6 +162,10 @@
                 
                 this.appendChild(modDiv);
 
+                // Deshabilitar en la lista
+                draggedElement.classList.add('disabled');
+                draggedElement.setAttribute('draggable', 'false');
+
                 // Guardar el ranking actualizado
                 saveRanking();
             }
@@ -167,8 +174,17 @@
         }
 
         function removeFromRanking(btn) {
-            const parent = btn.parentElement.parentElement;
+            const modDiv = btn.parentElement;
+            const modId = modDiv.dataset.id;
+            const parent = modDiv.parentElement;
             parent.innerHTML = '';
+
+            const item = document.querySelector('.mod-item[data-id="' + modId + '"]');
+            if (item) {
+                item.classList.remove('disabled');
+                item.setAttribute('draggable', 'true');
+            }
+
             saveRanking();
         }
 
