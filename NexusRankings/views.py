@@ -270,6 +270,10 @@ def __mostrarRanking(request, game_id):
                 "author": next((m.author for m in mods if m.mod_id == p.mod_id), "Desconocido")
             })
 
+    if jogo.maxPosRankings is None:
+        jogo.maxPosRankings = 5
+
+    listaPosiciones = ''.join(str(i) for i in range(1, jogo.maxPosRankings + 1))
 
     migas = [
         ("Inicio", 'index'),
@@ -282,7 +286,7 @@ def __mostrarRanking(request, game_id):
         "gameId": jogo.game_id,
         "ranking": pos,
         "mods": mods,
-        "maximo": jogo.maxPosRankings,
+        "listaPosiciones": listaPosiciones,
     }}
     return __ir_ranking(request, context)
 

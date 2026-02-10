@@ -13,26 +13,33 @@
                 
                 <table class="tabla">
                     <tbody>
-                        <tr>
-                            <td>Posicionado 1</td>
-                            <td>{{ datos.numJogo.pos1 }}</td>
-                        </tr>
-                        <tr>
-                            <td>Posicionado 2</td>
-                            <td>{{ datos.numJogo.pos2 }}</td>
-                        </tr>
-                        <tr>
-                            <td>Posicionado 3</td>
-                            <td>{{ datos.numJogo.pos3 }}</td>
-                        </tr>
-                        <tr>
-                            <td>Posicionado 4</td>
-                            <td>{{ datos.numJogo.pos4 }}</td>
-                        </tr>
-                        <tr>
-                            <td>Posicionado 5</td>
-                            <td>{{ datos.numJogo.pos5 }}</td>
-                        </tr>
+                        {% comment %} Se asume que datos.numJogo es un diccionario: {posicion: valor} {% endcomment %}
+
+                        {% if datos.numJogo %}
+
+                            {% if datos.numJogo.items %}
+                                {% for k, v in datos.numJogo.items %}
+                                    <tr>
+                                        <td>Posicionado {{ k }}</td>
+                                        <td>{{ v }}</td>
+                                    </tr>
+                                {% endfor %}
+
+                            {% else %}
+                                {# Si no es dict, iteramos como lista de pares (tuplas) #}
+                                {% for pair in datos.numJogo %}
+                                    <tr>
+                                        <td>Posicionado {{ pair.0 }}</td>
+                                        <td>{{ pair.1 }}</td>
+                                    </tr>
+                                {% endfor %}
+                            {% endif %}
+
+                        {% else %}
+                            <tr>
+                                <td colspan="2">No hay datos disponibles</td>
+                            </tr>
+                        {% endif %}
                     </tbody>
                 </table>
 
@@ -55,12 +62,16 @@
                             <td>{{ datos.numMod.score3 }}</td>
                         </tr>
                         <tr>
-                            <td>Puntuaciones de 1</td>
+                            <td>Puntuaciones de 4</td>
                             <td>{{ datos.numMod.score4 }}</td>
                         </tr>
                         <tr>
                             <td>Puntuaciones de 5</td>
                             <td>{{ datos.numMod.score5 }}</td>
+                        </tr>
+                        <tr>
+                            <td>Puntuaciones de Media</td>
+                            <td>{{ datos.numMod.media }}</td>
                         </tr>
                     </tbody>
                 </table>

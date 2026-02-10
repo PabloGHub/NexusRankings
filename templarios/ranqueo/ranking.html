@@ -18,7 +18,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for pos in "12345"|make_list %}
+                        {% for pos in datos.listaPosiciones|make_list %}
                         <tr>
                             <td class="px-2">{{ pos }}</td>
                             <td class="px-2 drop-zone" data-position="{{ pos }}">

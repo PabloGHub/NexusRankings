@@ -92,11 +92,11 @@ def conPuntuacion(game_id:int, puntuacion:int = 1):
     return count
 
 
-def estadisticaMod(mod_id:int, maxPosiciones:int = 5):
+def estadisticaMod(mod_id:int):
     mod:Mod = getMod(mod_id)
     jogo:Game = getGame(mod.game_id)
 
-    numJogo = {f'pos{i}': 0 for i in range(1, maxPosiciones + 1)}
+    numJogo = {f'{i}': 0 for i in range(1, jogo.maxPosRankings + 1)}
     # total veces aparecio en cada posicion. # 'posX': 0,
     numMod = {
         'score1': 0,
@@ -109,12 +109,15 @@ def estadisticaMod(mod_id:int, maxPosiciones:int = 5):
     if jogo and jogo.rankings:
         for r in jogo.rankings:
             for p in r.posiciones:
-                if p.mod_id == mod_id:
-                    numJogo[f'pos{p.position}'] += 1
+                if p.mod_id == mod_id and p.position <= jogo.maxPosRankings:
+                    numJogo[f'{p.position}'] += 1
+    numJogo['media'] = sum(int(pos) * count for pos, count in numJogo.items() if pos.isdigit()) / sum(count for pos, count in numJogo.items() if pos.isdigit()) if sum(count for pos, count in numJogo.items() if pos.isdigit()) > 0 else 0
 
     if mod and mod.reputaciones:
         for r in mod.reputaciones:
-            numMod[f'score{r.score}'] += 1
+            if 1 <= r.score <= 5:
+                numMod[f'score{r.score}'] += 1
+    numMod['media'] = sum(int(score.replace('score', '')) * count for score, count in numMod.items() if score.startswith('score')) / sum(count for score, count in numMod.items() if score.startswith('score')) if sum(count for score, count in numMod.items() if score.startswith('score')) > 0 else 0
 
     return {
         'numJogo': numJogo,
