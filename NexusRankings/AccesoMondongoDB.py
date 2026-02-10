@@ -35,6 +35,7 @@ def delMod(mod_id:int):
 
 def getRanking(game_id:int, user_id:int):
     jogo:Game = getGame(game_id)
+    maximo = jogo.maxPosRankings if jogo else 5
     if jogo:
         for r in (jogo.rankings or []):
             if r.user_id == user_id:
@@ -91,17 +92,12 @@ def conPuntuacion(game_id:int, puntuacion:int = 1):
     return count
 
 
-def estadisticaMod(mod_id:int):
+def estadisticaMod(mod_id:int, maxPosiciones:int = 5):
     mod:Mod = getMod(mod_id)
     jogo:Game = getGame(mod.game_id)
 
-    numJogo = {
-        'pos1': 0,
-        'pos2': 0,
-        'pos3': 0,
-        'pos4': 0,
-        'pos5': 0,
-    } # total veces aparecio en cada posicion.
+    numJogo = {f'pos{i}': 0 for i in range(1, maxPosiciones + 1)}
+    # total veces aparecio en cada posicion. # 'posX': 0,
     numMod = {
         'score1': 0,
         'score2': 0,

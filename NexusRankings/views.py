@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import render
-from django.http import HttpResponseBadRequest
+from django.shortcuts import render, redirect
+from django.http import HttpResponseBadRequest, HttpResponseForbidden, HttpResponseNotFound, JsonResponse
 
 from .AccesoMondongoDB import *
 from .CargadorJson import *
@@ -282,6 +282,7 @@ def __mostrarRanking(request, game_id):
         "gameId": jogo.game_id,
         "ranking": pos,
         "mods": mods,
+        "maximo": jogo.maxPosRankings,
     }}
     return __ir_ranking(request, context)
 
@@ -404,3 +405,36 @@ def borrarMod(request, mod_id):
     if request.user.is_authenticated and request.user.is_superuser:
         delMod(mod_id)
     return listarMods(request, game_id)
+
+
+def modificarMaxPosiciones(request, game_id):
+    # Solo POST y solo superuser
+    if not (request.user.is_authenticated and request.user.is_superuser):
+        return inicio(request)
+
+    if request.method != 'POST':
+        return HttpResponseBadRequest('Se requiere POST')
+
+    max_raw = request.POST.get('max')
+    if max_raw is None:
+        return HttpResponseBadRequest('Falta el campo max')
+
+    try:
+        max_val = int(max_raw)
+    except ValueError:
+        return HttpResponseBadRequest('El valor max debe ser un entero')
+
+    if max_val < 1:
+        return HttpResponseBadRequest('El valor max debe ser >= 1')
+
+    game = getGame(game_id)
+    if not game:
+        return HttpResponseNotFound('Game no encontrado')
+
+    Game.objects.using("mongodb").filter(game_id=game_id).update(maxPosRankings=max_val)
+
+    # Si es AJAX, devolver JSON, sino redirigir a listarGames
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        return JsonResponse({'status': 'ok', 'max': max_val})
+
+    return listarGames(request)

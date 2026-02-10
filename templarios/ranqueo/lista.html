@@ -55,6 +55,16 @@
                             <a href="{% url 'borrarGame' cosa.game_id %}" class="nbtn">Eliminar</a>
                             <br>
                             ID: {{ cosa.game_id }}
+                            <br>
+                            <form action="{% url 'modificarMaxPosiciones' cosa.game_id %}" method="post" class="formulario">
+                                {% csrf_token %}
+                                <!-- Campo para editar el numero máximo de posiciones en el ranking -->
+                                <label>
+                                    <input type="number" name="max" value="{{ cosa.maxPosRankings }}" min="1">
+                                </label>
+                                <hr>
+                                <button type="submit" class="nbtn-pri mt-2">Actualizar</button>
+                            </form>
                         </td>
 
                     {% elif datos.accion == 1 %}

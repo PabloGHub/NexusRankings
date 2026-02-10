@@ -24,6 +24,7 @@ class Game(models.Model):
     nexusmods_url:str = models.CharField(max_length=200, null=False)
     mods:int = models.IntegerField(null=False)
     rankings:list = EmbeddedModelArrayField(Ranking, null=True, blank=True)
+    maxPosRankings:int = models.IntegerField(null=False, default=5)
 
     class Meta:
         db_table = 'game'

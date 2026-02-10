@@ -19,5 +19,5 @@ urlpatterns = [
     path("estadisticasMod/<int:mod_id>/", views.estadisticasMod, name="estadisticasMod"),
     path("listarUsuarios/", views.listarUsuarios, name="listarUsuarios"),
     path("borrarUsuario/<int:user_id>/", views.borrarUsuario, name="borrarUsuario"),
+    path("modificarMaxPosiciones/<int:game_id>/", views.modificarMaxPosiciones, name="modificarMaxPosiciones"),
 ]
-
